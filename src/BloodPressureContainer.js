@@ -62,14 +62,6 @@ const BloodPressureContainer = () => {
         return unsub;
     }, []);
 
-    // useEffect(() => {
-    //     const getBloodPressure = async () => {
-    //         const data = await getDocs(bloodPressureCollectionRef);
-    //         setBloodPressure(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    //     };
-    //     getBloodPressure();
-    // }, []);
-
 
     return (
         <div>
