@@ -12,8 +12,9 @@ import {
     // updateDoc,
     deleteDoc,
     doc,
+    onSnapshot,
     orderBy,
-    onSnapshot, query
+    query
 } from "firebase/firestore";
 
 
@@ -27,14 +28,9 @@ const Mainpage = () => {
 
     const [title, setNewTitle] = useState("");
     const [body, setNewBody] = useState("");
-    // const [createdAt, setNewTimestamp] = useState("");
 
     const [medication, setMedication] = useState([]);
     const mediCollectionRef = collection(db, "medication");
-
-    // const createUser = async () => {
-    //   await addDoc(usersCollectionRef, { firstName: firstName, lastName: lastName });
-    // };
 
     const createMedi = async () => {
         const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
