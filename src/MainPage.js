@@ -7,7 +7,7 @@ import { db } from "./firebase-config";
 
 import {
     collection,
-    getDocs,
+    // getDocs, //stattdessen query
     addDoc,
     // updateDoc,
     deleteDoc,
@@ -37,10 +37,11 @@ const Mainpage = () => {
     // };
 
     const createMedi = async () => {
+        const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         await addDoc(mediCollectionRef, {
             title: title,
             body: body,
-            // createdAt: createdAt
+            time: date
         });
     };
 
@@ -121,6 +122,7 @@ const Mainpage = () => {
                         <div className="container" key={medication.id}>
 
                             <p>Medication: {medication.title} / {medication.body}</p>
+                            <p>{medication.time.toString()}</p>
                             <div>
                                 {/* <button
                                     onClick={() => {
