@@ -4,6 +4,7 @@ import { auth } from './firebase';
 import { useState, useEffect } from "react";
 
 import { db } from "./firebase-config";
+
 import {
     collection,
     getDocs,
@@ -24,7 +25,7 @@ const Mainpage = () => {
 
     const [title, setNewTitle] = useState("");
     const [body, setNewBody] = useState("");
-    const [createdAt, setNewTimestamp] = useState("");
+    // const [createdAt, setNewTimestamp] = useState("");
 
     const [medication, setMedication] = useState([]);
     const mediCollectionRef = collection(db, "medication");
@@ -37,7 +38,7 @@ const Mainpage = () => {
         await addDoc(mediCollectionRef, {
             title: title,
             body: body,
-            createdAt: createdAt
+            // createdAt: createdAt
         });
     };
 
@@ -47,15 +48,15 @@ const Mainpage = () => {
     //   await updateDoc(userDoc, newFields);
     // };
 
-    const updateMedication = async (id, lastName) => {
-        const medicationDoc = doc(db, "medication", id);
-        const newFields = {
-            title: title,
-            createdAt: createdAt
-        };
-        // await updateDoc(medicationDoc, newFields);
-        await addDoc(medicationDoc, { createdAt: createdAt });
-    };
+    // const updateMedication = async (id, lastName) => {
+    //     const medicationDoc = doc(db, "medication", id);
+    //     const newFields = {
+    //         title: title,
+    //         // createdAt: createdAt
+    //     };
+    //     // await updateDoc(medicationDoc, newFields);
+    //     await addDoc(medicationDoc, /* { createdAt: createdAt } */);
+    // };
 
     const deleteMedication = async (id) => {
         const medicationDoc = doc(db, "medication", id);
@@ -65,6 +66,7 @@ const Mainpage = () => {
 
     useEffect(() => {
         const getMedication = async () => {
+            const mediCollectionRef = collection(db, "medication");
             const data = await getDocs(mediCollectionRef);
             setMedication(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         };
@@ -107,7 +109,7 @@ const Mainpage = () => {
                             <p>Medication: {medication.title}</p>
 
                             <div>
-                                <button
+                                {/* <button
                                     onClick={() => {
                                         // updateUser(user.id, user.lastName);
                                         updateMedication(
@@ -119,7 +121,7 @@ const Mainpage = () => {
                                     }}
                                 >
                                     +
-                                </button>
+                                </button> */}
 
                                 <button
                                     onClick={() => {

@@ -3,8 +3,8 @@ import { auth } from './firebase';
 
 import { useState, useEffect } from "react";
 
-// import { db } from "./firebase-config";
-import { db } from "./firebase";
+import { db } from "./firebase-config";
+// import { db } from "./firebase";
 
 import {
     collection,
@@ -37,17 +37,17 @@ const BloodPressureContainer = () => {
     // const [time, setTimestamp] = useState("");
     const [bloodPressure, setBloodPressure] = useState([]);
 
-    // const bloodPressureCollectionRef = collection(db, "bloodPressure");
+    const bloodPressureCollectionRef = collection(db, "bloodPressure");
 
     const addBloodPressure = async () => {
-        const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" })
-        const bloodPressureCollectionRef = collection(db, "bloodPressure");
+        // const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" })
+
         await addDoc(bloodPressureCollectionRef, {
             value1: value1,
             value2: value2,
             comment: comment,
             // time: serverTimestamp()
-            time: date
+            // time: date
         });
     };
 
