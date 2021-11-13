@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400;600;700&display=swap");
+
+
+$base-color: #F4F3F1;
+$dark-color: #27336b;
+$accent-color: #80ecda;
+$accent-color-op: #80ecda86;
+$font-sans: 'Montserrat',
+sans-serif;
+$font-serif: 'Roboto Slab',
+serif;
+$font-big: 3rem;
+$font-medium: 1.5rem;
+$font-small: 1rem;
+$font-tiny: 12px;
+$font-heavy: 600;
+$font-light: 300;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-serif;
+    font-size: $font-small;
+    font-weight: $font-light;
+    background-color: $base-color;
+    color: $dark-color;
+    // display: grid;
+    margin: 0 auto;
+    width: 100%;
+}
+
+h1 {
+    font-size: $font-big;
+    text-align: center;
+}
+
+h2 {
+    font-size: $font-medium;
+    font-weight: $font-heavy;
+    text-align: center;
+}
+
+// p {
+//     text-align: center;
+// }
+
+.container {
+    padding: 1em;
+    margin: 0.5em;
+    display: grid;
+    justify-items: center;
+    background-color: $dark-color;
+    border-radius: 0.5em;
+    color: $accent-color;
+}
+
+.welcome {
+    font-size: $font-tiny;
+    text-align: center;
+}
+
+.date-container {
+    color: $accent-color;
+    display: flex;
+    justify-content: center;
+}
+
+.blood-pressure-input-box {
+    // background-color: $dark-color;
+    border-radius: 0.5em;
+    color: $accent-color;
+    padding: 1em;
+    margin: 0.5em;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    // justify-content: space-between;
+}
+
+.blood-pressure-input {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+input {
+    background-color: $accent-color;
+    border: none;
+    border-radius: 0.5em;
+    color: $dark-color;
+    font-family: $font-serif;
+    height: 3em;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    flex-grow: 1;
+    width: 70px;
+}
+
+.blood-pressure-values {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.blood-pressure-comment {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.blood-pressure-list-item {
+    // background-color: $dark-color;
+    border-bottom: 2px dotted;
+    // border-radius: 0.5em;
+    color: $dark-color;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1em;
+    margin: 0.5em;
+    text-align: left;
+}
+
+button {
+    border: 0;
+    border-radius: 50% 50%;
+    // height: 1em;
+    // width: 1em;
+    // margin: 1em;
+    cursor: pointer;
+    background-color: $base-color;
+    color: $dark-color;
+    font-family: "Roboto Slab", serif;
+    font-size: $font-small;
+}
+
+.btn-add {
+    background-color: $accent-color;
+    font-size: $font-small;
+    font-weight: $font-heavy;
+    margin: 0 0 0 1rem;
+}
+
+.btn-add-bp {
+    background-color: $accent-color;
+    font-size: $font-small;
+    font-weight: $font-heavy;
+    height: 4em;
+    width: 4em;
+}
+
+.btn-bp {
+    align-self: flex-end;
+}
+
+.btn-login {
+    height: 10em;
+    width: 10em;
+    margin: 1em;
+    background-color: $accent-color;
+}
+
+.btn-logout {
+    background-color: $accent-color;
+    border-radius: 0.5em 0.5em;
+    height: 3em;
+    // width: 10em;
+    padding: 0 10px 0 10px;
+    margin: 1em;
+    opacity: 0.5;
+}
+
+.changeColor {
+    background-color: $dark-color;
+    color: $accent-color;
+}

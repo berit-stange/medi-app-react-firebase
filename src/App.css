@@ -1,75 +1,28 @@
-/* .App {
-  text-align: center;
-} */
-
-/* .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-} */
-
-/* @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-} */
-
-/* .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
-
-/* .App-link {
-  color: #61dafb;
-} */
-
-/* @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
-
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400;600;700&display=swap");
 * {
   -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 body {
-  font-family: "Roboto Slab", serif !important;
-  font-size: 16px;
-  font-weight: 400;
-  /* line-height: 1.9; */
-  background-color: #F4F3F1 !important;
-  color: #27336b !important;
-  display: -ms-grid;
-  display: grid;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+  font-family: "Roboto Slab", serif;
+  font-size: 1rem;
+  font-weight: 300;
+  background-color: #F4F3F1;
+  color: #27336b;
+  margin: 0 auto;
+  width: 100%;
 }
 
 h1 {
-  font-size: 3rem !important;
+  font-size: 3rem;
   text-align: center;
 }
 
 h2 {
-  font-size: 2rem !important;
-}
-
-p {
+  font-size: 1.5rem;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -80,13 +33,14 @@ p {
   display: grid;
   justify-items: center;
   background-color: #27336b;
+  border-radius: 0.5em;
   color: #80ecda;
 }
 
-/* .center {
-  display: flex;
-  justify-content: space-between;
-} */
+.welcome {
+  font-size: 12px;
+  text-align: center;
+}
 
 .date-container {
   color: #80ecda;
@@ -94,35 +48,154 @@ p {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.blood-pressure-input-box {
+  border-radius: 0.5em;
+  color: #80ecda;
+  padding: 1em;
+  margin: 0.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.blood-pressure-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+input {
+  background-color: #80ecda;
+  border: none;
+  border-radius: 0.5em;
+  color: #27336b;
+  font-family: "Roboto Slab", serif;
+  height: 3em;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  width: 70px;
+}
+
+.blood-pressure-values {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.blood-pressure-comment {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.blood-pressure-list-item {
+  border-bottom: 2px dotted;
+  color: #27336b;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 1em;
+  margin: 0.5em;
+  text-align: left;
 }
 
 button {
   border: 0;
   border-radius: 50% 50%;
-  height: 3em;
-  width: 3em;
-  margin: 1em;
   cursor: pointer;
   background-color: #F4F3F1;
   color: #27336b;
   font-family: "Roboto Slab", serif;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .btn-add {
   background-color: #80ecda;
-  font-size: 20px;
+  font-size: 1rem;
   font-weight: 600;
   margin: 0 0 0 1rem;
 }
 
-input {
-  margin: 0 0.5rem 0 0;
+.btn-add-bp {
+  background-color: #80ecda;
+  font-size: 1rem;
+  font-weight: 600;
+  height: 4em;
+  width: 4em;
+}
+
+.btn-bp {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+.btn-login {
+  height: 10em;
+  width: 10em;
+  margin: 1em;
+  background-color: #80ecda;
+}
+
+.btn-logout {
+  background-color: #80ecda;
+  border-radius: 0.5em 0.5em;
+  height: 3em;
+  padding: 0 10px 0 10px;
+  margin: 1em;
+  opacity: 0.5;
 }
 
 .changeColor {
   background-color: #27336b;
   color: #80ecda;
 }
+/*# sourceMappingURL=App.css.map */
