@@ -78,7 +78,7 @@ const Mainpage = () => {
 
     useEffect(() => {
         const mediCollectionRef = collection(db, "medication");
-        const q = query(mediCollectionRef, orderBy("title", "asc"));
+        const q = query(mediCollectionRef, orderBy("time", "asc"));
         const unsub = onSnapshot(q, (snapshot) =>
             setMedication(snapshot.docs.map((doc) => ({
                 ...doc.data(),
