@@ -12,6 +12,8 @@ import {
     // updateDoc,
     deleteDoc,
     doc,
+    // orderBy
+    onSnapshot, query
 } from "firebase/firestore";
 
 
@@ -64,13 +66,25 @@ const Mainpage = () => {
     };
 
 
+    // useEffect(() => {
+    //     const getMedication = async () => {
+    //         const mediCollectionRef = collection(db, "medication");
+    //         const data = await getDocs(mediCollectionRef);
+    //         setMedication(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    //     };
+    //     getMedication();
+    // }, []);
+
     useEffect(() => {
-        const getMedication = async () => {
-            const mediCollectionRef = collection(db, "medication");
-            const data = await getDocs(mediCollectionRef);
-            setMedication(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        };
-        getMedication();
+        const mediCollectionRef = collection(db, "medication");
+        const q = query(mediCollectionRef/* , orderBy("time", "desc") */);
+        const unsub = onSnapshot(q, (snapshot) =>
+            setMedication(snapshot.docs.map((doc) => ({
+                ...doc.data(),
+                id: doc.id
+            })))
+        );
+        return unsub;
     }, []);
 
 
@@ -106,8 +120,7 @@ const Mainpage = () => {
                     return (
                         <div className="container" key={medication.id}>
 
-                            <p>Medication: {medication.title}</p>
-
+                            <p>Medication: {medication.title} / {medication.body}</p>
                             <div>
                                 {/* <button
                                     onClick={() => {
