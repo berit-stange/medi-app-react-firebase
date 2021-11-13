@@ -12,7 +12,7 @@ import {
     // updateDoc,
     deleteDoc,
     doc,
-    // orderBy
+    orderBy,
     onSnapshot, query
 } from "firebase/firestore";
 
@@ -77,7 +77,7 @@ const Mainpage = () => {
 
     useEffect(() => {
         const mediCollectionRef = collection(db, "medication");
-        const q = query(mediCollectionRef/* , orderBy("time", "desc") */);
+        const q = query(mediCollectionRef, orderBy("title", "asc"));
         const unsub = onSnapshot(q, (snapshot) =>
             setMedication(snapshot.docs.map((doc) => ({
                 ...doc.data(),
