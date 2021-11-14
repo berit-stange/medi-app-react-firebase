@@ -15,7 +15,12 @@ function Navigation() {
     return (
         <div>
 
+            <div className="welcome">
+                Welcome {auth.currentUser.email}!
+            </div>
+
             <div className="nav-container">
+
                 <div>
                     <button className="btn-logout" onClick={logout}>Logout</button>
                 </div>
@@ -31,10 +36,7 @@ function Navigation() {
                         <li>Day</li>
                     </Link>
                 </ul>
-            </div>
 
-            <div className="welcome">
-                Welcome {auth.currentUser.email}!
             </div>
 
         </div>

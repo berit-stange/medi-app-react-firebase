@@ -12,7 +12,53 @@ body {
   background-color: #F4F3F1;
   color: #27336b;
   margin: 0 auto;
-  width: 100%;
+  max-width: 720px;
+}
+
+.nav-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.nav-container ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.nav-container ul li {
+  list-style: none;
+  text-decoration: none;
+  padding: 10px;
+  background-color: #80ecda;
+  border-radius: 0.5em 0.5em;
+  height: 3em;
+  padding: 10px;
+  margin: 0 0.5em;
+}
+
+.nav-container ul li:visited {
+  color: red;
+  text-decoration: none;
+}
+
+.btn-logout {
+  background-color: #80ecda86;
+  border-radius: 0.5em 0.5em;
+  height: 3em;
+  padding: 0 10px 0 10px;
+}
+
+.day-container {
+  background-color: #80ecda;
+  margin: 0 auto;
+  padding: 0px;
+  height: 80vh;
+  width: 70%;
 }
 
 h1 {
@@ -39,6 +85,7 @@ h2 {
 
 .welcome {
   font-size: 12px;
+  padding-top: 10px;
   text-align: center;
 }
 
@@ -193,15 +240,6 @@ button {
   width: 10em;
   margin: 1em;
   background-color: #80ecda;
-}
-
-.btn-logout {
-  background-color: #80ecda;
-  border-radius: 0.5em 0.5em;
-  height: 3em;
-  padding: 0 10px 0 10px;
-  margin: 1em;
-  opacity: 0.5;
 }
 
 .changeColor {

@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import Navigation from './Navigation';
-import MainPage from './MainPage';
+import Navigation from './Navigation';
+// import MainPage from './MainPage';
+import DayView from './DayView';
 import MedicationList from './MedicationList';
 import BloodPressureContainer from './BloodPressureContainer';
 
@@ -25,8 +26,9 @@ function App() {
     user ?
 
       <BrowserRouter>
+        <Navigation />
         <Routes>
-          <Route exact path="/" element={<MainPage />} />
+          <Route exact path="/" element={<DayView />} />
           <Route exact path="medication-list" element={<MedicationList />} />
           <Route exact path="blood-pressure" element={<BloodPressureContainer />} />
         </Routes>

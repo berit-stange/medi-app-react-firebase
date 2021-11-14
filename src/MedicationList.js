@@ -54,11 +54,23 @@ const MedicationList = () => {
         await deleteDoc(medicationDoc);
     };
 
+    // useEffect(() => {
+    //     const getMedication = async () => {
+    //         const mediCollectionRef = collection(db, "medication");
+    //         const data = await getDocs(mediCollectionRef);
+    //         setMedication(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    //     };
+    //     getMedication();
+    // }, []);
+
     useEffect(() => {
         const getMedication = async () => {
             const mediCollectionRef = collection(db, "medication");
             const data = await getDocs(mediCollectionRef);
-            setMedication(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+            setMedication(data.docs
+                .map((doc) => ({ ...doc.data(), id: doc.id }))
+                .sort((a, b) => a.title > b.title ? 1 : -1)
+            );
         };
         getMedication();
     }, []);

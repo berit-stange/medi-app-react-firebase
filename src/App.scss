@@ -27,9 +27,52 @@ body {
     font-weight: $font-light;
     background-color: $base-color;
     color: $dark-color;
-    // display: grid;
     margin: 0 auto;
-    width: 100%;
+    max-width: 720px;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    // align-content: center;
+    // padding: 10px;
+
+    ul {
+        display: flex;
+        // justify-content: space-evenly;
+
+        li {
+            list-style: none;
+            text-decoration: none;
+            padding: 10px;
+            background-color: $accent-color;
+            border-radius: 0.5em 0.5em;
+            height: 3em;
+            padding: 10px;
+            margin: 0 0.5em;
+
+            &:visited {
+                color: red;
+                text-decoration: none;
+            }
+        }
+
+    }
+}
+
+.btn-logout {
+    background-color: $accent-color-op;
+    border-radius: 0.5em 0.5em;
+    height: 3em;
+    padding: 0 10px 0 10px;
+}
+
+.day-container {
+    background-color: $accent-color;
+    margin: 0 auto;
+    padding: 0px;
+    height: 80vh;
+    width: 70%;
 }
 
 h1 {
@@ -59,6 +102,7 @@ h2 {
 
 .welcome {
     font-size: $font-tiny;
+    padding-top: 10px;
     text-align: center;
 }
 
@@ -174,16 +218,6 @@ button {
     width: 10em;
     margin: 1em;
     background-color: $accent-color;
-}
-
-.btn-logout {
-    background-color: $accent-color;
-    border-radius: 0.5em 0.5em;
-    height: 3em;
-    // width: 10em;
-    padding: 0 10px 0 10px;
-    margin: 1em;
-    opacity: 0.5;
 }
 
 .changeColor {

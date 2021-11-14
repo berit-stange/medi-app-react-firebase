@@ -22,11 +22,6 @@ import {
 
 const BloodPressureContainer = () => {
 
-    // Signout function
-    const logout = () => {
-        auth.signOut();
-    }
-
     const [user] = useAuthState(auth);
     const [value1, setBloodPressureValue1] = useState("");
     const [value2, setBloodPressureValue2] = useState("");
@@ -64,14 +59,6 @@ const BloodPressureContainer = () => {
 
     return (
         <div>
-            <div className="welcome">
-                Welcome {auth.currentUser.email}!
-
-                <button className="btn-logout"
-                    onClick={logout}>
-                    Logout
-                </button>
-            </div>
 
             <div>
                 <h2>Add Blood Pressure</h2>

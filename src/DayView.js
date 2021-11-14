@@ -7,7 +7,7 @@ const DayView = () => {
     return (
 
         <div className="day-container">
-            <h1>Day View</h1>
+            <h1>Today</h1>
         </div>
 
     );
