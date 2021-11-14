@@ -1,8 +1,14 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import Navigation from './Navigation';
+import MainPage from './MainPage';
+import MedicationList from './MedicationList';
+import BloodPressureContainer from './BloodPressureContainer';
+
 import { auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import GoogleLogin from './GoogleLogin';
-import Mainpage from './MainPage';
+// import MainPage from './MainPage';
 // import BloodPressureContainer from './BloodPressureContainer';
 
 // import { useState, useEffect } from "react";
@@ -13,10 +19,19 @@ function App() {
   // Google Login
   const [user] = useAuthState(auth);
 
-
   return (
-    user ? <Mainpage /> : <GoogleLogin />
+    // user ? <MainPage /> : <GoogleLogin />
     // user ? <BloodPressureContainer /> : <GoogleLogin />
+    user ?
+
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<MainPage />} />
+          <Route exact path="medication-list" element={<MedicationList />} />
+          <Route exact path="blood-pressure" element={<BloodPressureContainer />} />
+        </Routes>
+      </BrowserRouter>
+      : <GoogleLogin />
   );
 }
 
