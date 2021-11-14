@@ -2,8 +2,8 @@ import React from 'react';
 import { auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import GoogleLogin from './GoogleLogin';
-// import Mainpage from './MainPage';
-import BloodPressureContainer from './BloodPressureContainer';
+import Mainpage from './MainPage';
+// import BloodPressureContainer from './BloodPressureContainer';
 
 // import { useState, useEffect } from "react";
 import "./App.css";
@@ -15,8 +15,8 @@ function App() {
 
 
   return (
-    // user ? <Mainpage /> : <GoogleLogin />
-    user ? <BloodPressureContainer /> : <GoogleLogin />
+    user ? <Mainpage /> : <GoogleLogin />
+    // user ? <BloodPressureContainer /> : <GoogleLogin />
   );
 }
 

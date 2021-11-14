@@ -7,14 +7,14 @@ import { db } from "./firebase-config";
 
 import {
     collection,
-    // getDocs, //stattdessen query
+    getDocs, //stattdessen query
     addDoc,
     // updateDoc,
     deleteDoc,
     doc,
-    onSnapshot,
-    orderBy,
-    query
+    // onSnapshot,
+    // orderBy,
+    // query
 } from "firebase/firestore";
 
 
@@ -25,10 +25,8 @@ const Mainpage = () => {
         auth.signOut();
     }
 
-
     const [title, setNewTitle] = useState("");
     const [body, setNewBody] = useState("");
-
     const [medication, setMedication] = useState([]);
     const mediCollectionRef = collection(db, "medication");
 
@@ -62,98 +60,89 @@ const Mainpage = () => {
         await deleteDoc(medicationDoc);
     };
 
+    useEffect(() => {
+        const getMedication = async () => {
+            const mediCollectionRef = collection(db, "medication");
+            const data = await getDocs(mediCollectionRef);
+            setMedication(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        };
+        getMedication();
+    }, []);
 
     // useEffect(() => {
-    //     const getMedication = async () => {
-    //         const mediCollectionRef = collection(db, "medication");
-    //         const data = await getDocs(mediCollectionRef);
-    //         setMedication(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    //     };
-    //     getMedication();
+    //     const mediCollectionRef = collection(db, "medication");
+    //     const q = query(mediCollectionRef, orderBy("time", "asc"));
+    //     const unsub = onSnapshot(q, (snapshot) =>
+    //         setMedication(snapshot.docs.map((doc) => ({
+    //             ...doc.data(),
+    //             id: doc.id
+    //         })))
+    //     );
+    //     return unsub;
     // }, []);
-
-    useEffect(() => {
-        const mediCollectionRef = collection(db, "medication");
-        const q = query(mediCollectionRef, orderBy("time", "asc"));
-        const unsub = onSnapshot(q, (snapshot) =>
-            setMedication(snapshot.docs.map((doc) => ({
-                ...doc.data(),
-                id: doc.id
-            })))
-        );
-        return unsub;
-    }, []);
 
 
     return (
         <div>
-            Welcome {auth.currentUser.email}!
+            <div className="welcome">
+                Welcome {auth.currentUser.email}!
 
-            <button style={{ "marginLeft": "20px" }}
-                onClick={logout}>
-                Logout
-            </button>
-
-            <div>
-                <div className="">
-                    <input
-                        placeholder="Medication..."
-                        onChange={(event) => {
-                            setNewTitle(event.target.value);
-                        }}
-                    />
-                    <input
-                        // type="number"
-                        placeholder="Take at..."
-                        onChange={(event) => {
-                            setNewBody(event.target.value);
-                        }}
-                    />
-                    <button className="btn-add" onClick={createMedi}>+</button>
-                </div>
-
-
-                {medication.map((medication) => {
-                    return (
-                        <div className="container" key={medication.id}>
-
-                            <p>Medication: {medication.title} / {medication.body}</p>
-                            <p>{medication.time.toString()}</p>
-                            <div>
-                                {/* <button
-                                    onClick={() => {
-                                        // updateUser(user.id, user.lastName);
-                                        updateMedication(
-                                            medication.id,
-                                            medication.title,
-                                            medication.body,
-                                            medication.createdAt
-                                        );
-                                    }}
-                                >
-                                    +
-                                </button> */}
-
-                                <button
-                                    onClick={() => {
-                                        // deleteUser(user.id);
-                                        deleteMedication(medication.id);
-                                    }}
-                                >
-                                    -
-                                </button>
-                            </div>
-
-                        </div>
-                    );
-                })}
-
-
+                <button style={{ "marginLeft": "20px" }}
+                    onClick={logout}>
+                    Logout
+                </button>
             </div>
 
+            <div>
+                <div className="blood-pressure-input-box">
+                    <div className="blood-pressure-input">
+                        <div className="blood-pressure-values">
+                            <input
+                                placeholder="Medication..."
+                                onChange={(event) => {
+                                    setNewTitle(event.target.value);
+                                }}
+                            />
+                            <input
+                                // type="number"
+                                placeholder="Take at..."
+                                onChange={(event) => {
+                                    setNewBody(event.target.value);
+                                }}
+                            />
+                        </div>
+                        <div className="btn-bp">
+                            <button className="btn-add-med" onClick={createMedi}>+</button>
+                        </div>
+                    </div>
 
-
+                    <div>
+                        <h2>Medication List</h2>
+                        {medication.map((medication) => {
+                            return (
+                                <div className="blood-pressure-list-item" key={medication.id}>
+                                    <div>
+                                        <p>Medication: {medication.title} / {medication.body}</p>
+                                        {/* <p>{medication.time.toString()}</p> */}
+                                    </div>
+                                    <div className="btn-bp">
+                                        <button onClick={() => { deleteMedication(medication.id); }} >
+                                            <span className="material-icons-round">
+                                                delete
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+
+
     );
 }
 

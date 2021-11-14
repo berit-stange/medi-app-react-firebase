@@ -35,12 +35,12 @@ const BloodPressureContainer = () => {
     const bloodPressureCollectionRef = collection(db, "bloodPressure");
 
     const addBloodPressure = async () => {
-        const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+        // const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         await addDoc(bloodPressureCollectionRef, {
             value1: value1,
             value2: value2,
             comment: comment,
-            time: date,
+            // time: date,
             uid: user.uid
         });
     };
@@ -51,16 +51,10 @@ const BloodPressureContainer = () => {
     };
 
     useEffect(() => {
-        // const bloodPressureRef = collection(db, "bloodPressure").where("uid", "==", user.uid); //nope.
-        // const q = query(q2, where("uid", "==", user.uid));
         const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
-        // const q2 = query(q, orderBy("time", "desc"));
-        // const q = query(bloodPressureCollectionRef, orderBy("time", "desc"));
         const unsub = onSnapshot(q, (snapshot) =>
             setBloodPressure(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))));
         return unsub;
-        // const unsub2 = query(unsub, orderBy("time", "desc"));
-        // return unsub2;
     }, [
         user,
         bloodPressureCollectionRef
@@ -78,6 +72,7 @@ const BloodPressureContainer = () => {
                     Logout
                 </button>
             </div>
+
             <div>
                 <h2>Add Blood Pressure</h2>
                 <div className="blood-pressure-input-box">
@@ -121,17 +116,13 @@ const BloodPressureContainer = () => {
                             return (
                                 <div className="blood-pressure-list-item" key={bloodPressure.id}>
                                     <div>
-                                        <p>{bloodPressure.time.toString()}</p>
+                                        {/* <p>{bloodPressure.time.toString()}</p> */}
                                         <p>{bloodPressure.value1} / {bloodPressure.value2}</p>
                                         <p>{bloodPressure.comment}</p>
                                         {/* <p>uid: {bloodPressure.uid}</p> */}
                                     </div>
                                     <div className="btn-bp">
-                                        <button className=""
-                                            onClick={() => {
-                                                deleteBloodPressure(bloodPressure.id);
-                                            }}
-                                        >
+                                        <button className="" onClick={() => { deleteBloodPressure(bloodPressure.id); }} >
                                             <span className="material-icons-round">
                                                 delete
                                             </span>

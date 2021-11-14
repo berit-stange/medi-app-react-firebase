@@ -151,6 +151,7 @@ input {
 button {
   border: 0;
   border-radius: 50% 50%;
+  margin: 1em;
   cursor: pointer;
   background-color: #F4F3F1;
   color: #27336b;
@@ -163,6 +164,15 @@ button {
   font-size: 1rem;
   font-weight: 600;
   margin: 0 0 0 1rem;
+}
+
+.btn-add-med {
+  background-color: #80ecda;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0 1rem;
+  height: 3em;
+  width: 3em;
 }
 
 .btn-add-bp {
