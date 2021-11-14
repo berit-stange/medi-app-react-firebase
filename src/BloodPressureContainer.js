@@ -1,5 +1,6 @@
 import React from 'react';
 import { auth } from './firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { useState, useEffect } from "react";
 
@@ -13,8 +14,9 @@ import {
     deleteDoc,
     doc,
     onSnapshot,
-    orderBy,
-    query
+    // orderBy,
+    query,
+    where
 } from "firebase/firestore";
 
 
@@ -25,12 +27,10 @@ const BloodPressureContainer = () => {
         auth.signOut();
     }
 
-
-
+    const [user] = useAuthState(auth);
     const [value1, setBloodPressureValue1] = useState("");
     const [value2, setBloodPressureValue2] = useState("");
     const [comment, setBloodPressureComment] = useState("");
-
     const [bloodPressure, setBloodPressure] = useState([]);
     const bloodPressureCollectionRef = collection(db, "bloodPressure");
 
@@ -40,7 +40,8 @@ const BloodPressureContainer = () => {
             value1: value1,
             value2: value2,
             comment: comment,
-            time: date
+            time: date,
+            uid: user.uid
         });
     };
 
@@ -49,18 +50,22 @@ const BloodPressureContainer = () => {
         await deleteDoc(bloodPressureDoc);
     };
 
-
     useEffect(() => {
-        const bloodPressureRef = collection(db, "bloodPressure");
-        const q = query(bloodPressureRef, orderBy("time", "desc"));
+        // const bloodPressureRef = collection(db, "bloodPressure").where("uid", "==", user.uid); //nope.
+        // const q = query(q2, where("uid", "==", user.uid));
+        const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
+        // const q2 = query(q, orderBy("time", "desc"));
+        // const q = query(bloodPressureCollectionRef, orderBy("time", "desc"));
         const unsub = onSnapshot(q, (snapshot) =>
-            setBloodPressure(snapshot.docs.map((doc) => ({
-                ...doc.data(),
-                id: doc.id
-            })))
-        );
+            setBloodPressure(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))));
         return unsub;
-    }, []);
+        // const unsub2 = query(unsub, orderBy("time", "desc"));
+        // return unsub2;
+    }, [
+        user,
+        bloodPressureCollectionRef
+    ]);
+
 
 
     return (
@@ -106,9 +111,6 @@ const BloodPressureContainer = () => {
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
 
                 <div>
@@ -120,6 +122,7 @@ const BloodPressureContainer = () => {
                                     <p>{bloodPressure.time.toString()}</p>
                                     <p>{bloodPressure.value1} / {bloodPressure.value2}</p>
                                     <p>{bloodPressure.comment}</p>
+                                    <p>uid: {bloodPressure.uid}</p>
                                 </div>
                                 <div className="btn-bp">
                                     <button className=""
