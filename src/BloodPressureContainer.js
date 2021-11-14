@@ -115,29 +115,31 @@ const BloodPressureContainer = () => {
 
                 <div>
                     <h2>Blood Pressure Diary</h2>
-                    {bloodPressure.map((bloodPressure) => {
-                        return (
-                            <div className="blood-pressure-list-item" key={bloodPressure.id}>
-                                <div>
-                                    <p>{bloodPressure.time.toString()}</p>
-                                    <p>{bloodPressure.value1} / {bloodPressure.value2}</p>
-                                    <p>{bloodPressure.comment}</p>
-                                    <p>uid: {bloodPressure.uid}</p>
+                    {bloodPressure
+                        .sort((a, b) => a.time > b.time ? -1 : 1)
+                        .map((bloodPressure) => {
+                            return (
+                                <div className="blood-pressure-list-item" key={bloodPressure.id}>
+                                    <div>
+                                        <p>{bloodPressure.time.toString()}</p>
+                                        <p>{bloodPressure.value1} / {bloodPressure.value2}</p>
+                                        <p>{bloodPressure.comment}</p>
+                                        {/* <p>uid: {bloodPressure.uid}</p> */}
+                                    </div>
+                                    <div className="btn-bp">
+                                        <button className=""
+                                            onClick={() => {
+                                                deleteBloodPressure(bloodPressure.id);
+                                            }}
+                                        >
+                                            <span className="material-icons-round">
+                                                delete
+                                            </span>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className="btn-bp">
-                                    <button className=""
-                                        onClick={() => {
-                                            deleteBloodPressure(bloodPressure.id);
-                                        }}
-                                    >
-                                        <span className="material-icons-round">
-                                            delete
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
                 </div>
             </div>
 
