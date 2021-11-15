@@ -13,8 +13,9 @@ serif;
 $font-big: 3rem;
 $font-medium: 1.5rem;
 $font-small: 1rem;
-$font-tiny: 12px;
+$font-tiny: 0.8rem;
 $font-heavy: 600;
+$font-regular: 400;
 $font-light: 300;
 
 * {
@@ -31,30 +32,48 @@ body {
     max-width: 720px;
 }
 
+h1 {
+    font-size: $font-medium;
+    margin: 0.3em;
+    text-align: center;
+}
+
+h2 {
+    font-size: $font-small;
+    font-weight: $font-regular;
+    // margin: 0;
+    text-align: center;
+}
+
+// p {
+//     text-align: center;
+// }
+
 .nav-container {
     display: flex;
     justify-content: space-between;
-    // align-content: center;
-    // padding: 10px;
+    width: 99%;
 
     ul {
         display: flex;
-        // justify-content: space-evenly;
 
-        li {
-            list-style: none;
+        a {
             text-decoration: none;
-            padding: 10px;
-            background-color: $accent-color;
-            border-radius: 0.5em 0.5em;
-            height: 3em;
-            padding: 10px;
-            margin: 0 0.5em;
 
             &:visited {
-                color: red;
-                text-decoration: none;
+                color: $dark-color;
             }
+        }
+
+        li {
+            background-color: $accent-color;
+            border-radius: 0.5em 0.5em;
+            list-style: none;
+            font-weight: $font-regular;
+            font-size: $font-tiny;
+            height: 3em;
+            margin: 0 0.5em;
+            padding: 0.8em 0.7em 0 0.7em;
         }
 
     }
@@ -63,41 +82,11 @@ body {
 .btn-logout {
     background-color: $accent-color-op;
     border-radius: 0.5em 0.5em;
-    height: 3em;
-    padding: 0 10px 0 10px;
-}
-
-.day-container {
-    background-color: $accent-color;
-    margin: 0 auto;
-    padding: 0px;
-    height: 80vh;
-    width: 70%;
-}
-
-h1 {
-    font-size: $font-big;
-    text-align: center;
-}
-
-h2 {
-    font-size: $font-medium;
-    font-weight: $font-heavy;
-    text-align: center;
-}
-
-// p {
-//     text-align: center;
-// }
-
-.container {
-    padding: 1em;
-    margin: 0.5em;
-    display: grid;
-    justify-items: center;
-    background-color: $dark-color;
-    border-radius: 0.5em;
-    color: $accent-color;
+    font-weight: $font-regular;
+    font-size: $font-tiny;
+    height: 3.2em;
+    margin: 1em;
+    padding: 0 10px 2px 10px;
 }
 
 .welcome {
@@ -106,29 +95,30 @@ h2 {
     text-align: center;
 }
 
+.day-container {
+    background-color: $dark-color;
+    border-radius: 0.5em;
+    color: $accent-color;
+    margin: 0 auto;
+    padding: 10px;
+    height: 88vh;
+    width: 95%;
+}
+
+.container {
+    background-color: $dark-color;
+    border-radius: 0.5em;
+    color: $accent-color;
+    display: grid;
+    padding: 1em;
+    margin: 0.5em;
+    justify-items: center;
+}
+
 .date-container {
     color: $accent-color;
     display: flex;
     justify-content: center;
-}
-
-.blood-pressure-input-box {
-    // background-color: $dark-color;
-    border-radius: 0.5em;
-    color: $accent-color;
-    padding: 1em;
-    margin: 0.5em;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    // justify-content: space-between;
-}
-
-.blood-pressure-input {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: stretch;
 }
 
 input {
@@ -144,6 +134,25 @@ input {
     width: 70px;
 }
 
+.blood-pressure-input-box {
+    // background-color: $dark-color;
+    border-radius: 0.5em;
+    // color: $accent-color;
+    padding: 1em;
+    margin: 0.5em;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    // justify-content: space-between;
+}
+
+.blood-pressure-input {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: stretch;
+}
+
 .blood-pressure-values {
     display: flex;
     flex-wrap: wrap;
@@ -156,6 +165,7 @@ input {
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
+    margin: 0;
 }
 
 .blood-pressure-list-item {
@@ -166,6 +176,7 @@ input {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    font-weight: $font-regular;
     justify-content: space-between;
     padding: 1em;
     margin: 0.5em;
@@ -173,16 +184,14 @@ input {
 }
 
 button {
+    background-color: $base-color;
     border: 0;
     border-radius: 50% 50%;
-    // height: 1em;
-    // width: 1em;
-    margin: 1em;
-    cursor: pointer;
-    background-color: $base-color;
     color: $dark-color;
+    cursor: pointer;
     font-family: "Roboto Slab", serif;
     font-size: $font-small;
+    // margin: 1em;
 }
 
 .btn-add {
@@ -207,10 +216,31 @@ button {
     font-weight: $font-heavy;
     height: 4em;
     width: 4em;
+    margin: 0 0 0 1rem;
 }
 
-.btn-bp {
-    align-self: flex-end;
+.btn-box {
+    // align-self: flex-end;
+    align-self: baseline;
+}
+
+.medi-list-item {
+    // background-color: $dark-color;
+    border-bottom: 2px dotted;
+    // border-radius: 0.5em;
+    color: $dark-color;
+    display: flex;
+    // flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: $font-regular;
+    padding: 1em;
+    margin: 0.5em;
+    text-align: left;
+}
+
+.btn-med-delete {
+    align-self: baseline;
 }
 
 .btn-login {
