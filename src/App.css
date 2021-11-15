@@ -124,10 +124,14 @@ input {
   width: 70px;
 }
 
+.blood-pressure-title {
+  margin: 0.8em 0 0 0;
+}
+
 .blood-pressure-input-box {
   border-radius: 0.5em;
   padding: 1em;
-  margin: 0.5em;
+  margin: 0 0 0.8em 0 0 0 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

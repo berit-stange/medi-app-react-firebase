@@ -134,12 +134,19 @@ input {
     width: 70px;
 }
 
+.blood-pressure-title {
+    // font-size: $font-small;
+    // font-weight: $font-regular;
+    margin: 0.8em 0 0 0;
+    // text-align: center;
+}
+
 .blood-pressure-input-box {
     // background-color: $dark-color;
     border-radius: 0.5em;
     // color: $accent-color;
     padding: 1em;
-    margin: 0.5em;
+    margin: 0 0 0.8em 0 0 0 0;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;

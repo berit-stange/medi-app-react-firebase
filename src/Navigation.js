@@ -22,13 +22,13 @@ function Navigation() {
                 </div>
 
                 <ul>
-                    <Link to="blood-pressure">
+                    <Link to="medi-app-react-firebase/blood-pressure">
                         <li>Blutdruck</li>
                     </Link>
-                    <Link to="medication-list">
+                    <Link to="medi-app-react-firebase/medication-list">
                         <li>Medis</li>
                     </Link>
-                    <Link to="/">
+                    <Link to="medi-app-react-firebase/today">
                         <li>Heute</li>
                     </Link>
                 </ul>
