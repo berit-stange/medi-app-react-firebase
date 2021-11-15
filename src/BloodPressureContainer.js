@@ -8,13 +8,14 @@ import { db } from "./firebase-config";
 
 import {
     collection,
-    // getDocs, //stattdessen query
+    getDocs, //stattdessen query
     addDoc,
     // updateDoc,
     deleteDoc,
     doc,
-    onSnapshot,
+    // onSnapshot,
     // orderBy,
+    serverTimestamp,
     query,
     where
 } from "firebase/firestore";
@@ -29,43 +30,74 @@ const BloodPressureContainer = () => {
     const [bloodPressure, setBloodPressure] = useState([]);
     const bloodPressureCollectionRef = collection(db, "bloodPressure");
 
-    const addBloodPressure = async () => {
-        // const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
-        await addDoc(bloodPressureCollectionRef, {
-            value1: value1,
-            value2: value2,
-            comment: comment,
-            // time: date,
-            uid: user.uid
-        });
-    };
+
+    // const addBloodPressure = async () => {
+    //     const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+    //     await addDoc(bloodPressureCollectionRef, {
+    //         value1: value1,
+    //         value2: value2,
+    //         comment: comment,
+    //         time: date,
+    //         timestamp: serverTimestamp(),
+    //         uid: user.uid
+    //     });
+    // };
 
     const deleteBloodPressure = async (id) => {
         const bloodPressureDoc = doc(db, "bloodPressure", id);
         await deleteDoc(bloodPressureDoc);
     };
 
+    // useEffect(() => {
+    //     const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
+    //     const unsub = onSnapshot(q, (snapshot) =>
+    //         setBloodPressure(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    //     );
+    //     return unsub;
+    //     // setTimeout(() => {
+    //     //     unsub();
+    //     // }, 1000);
+    // }, [
+    //     user,
+    //     bloodPressureCollectionRef
+    // ]);
+
     useEffect(() => {
-        const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
-        const unsub = onSnapshot(q, (snapshot) =>
-            setBloodPressure(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))));
-        return unsub;
+        const getBloodPressure = async () => {
+            const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
+            const querySnapshot = await getDocs(q);
+            setBloodPressure(querySnapshot.docs
+                .map((doc) => ({ ...doc.data(), id: doc.id }))
+            );
+        };
+        getBloodPressure();
     }, [
         user,
         bloodPressureCollectionRef
     ]);
 
+    // useEffect(() => {
+    //     const getBloodPressure = async () => {
+    //         const bloodPressureCollectionRef = collection(db, "bloodPressure");
+    //         const data = await getDocs(bloodPressureCollectionRef);
+    //         setBloodPressure(data.docs
+    //             .map((doc) => ({ ...doc.data(), id: doc.id }))
+    //         );
+    //     };
+    //     getBloodPressure();
+    // }, [
+    //     user,
+    //     bloodPressureCollectionRef
+    // ]);
 
 
     return (
         <div>
 
             <div>
-                <h2>Add Blood Pressure</h2>
-                <div className="blood-pressure-input-box">
-
+                {/* <h2>Add Blood Pressure</h2> */}
+                {/* <div className="blood-pressure-input-box">
                     <div className="blood-pressure-input">
-
                         <div className="blood-pressure-values">
                             <input
                                 placeholder="value 1"
@@ -93,22 +125,22 @@ const BloodPressureContainer = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 <div>
-                    <h2>Blood Pressure Diary</h2>
+                    <h2>Blutdruck Aufzeichnung</h2>
                     {bloodPressure
-                        .sort((a, b) => a.time > b.time ? -1 : 1)
+                        .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
                         .map((bloodPressure) => {
                             return (
                                 <div className="blood-pressure-list-item" key={bloodPressure.id}>
                                     <div>
-                                        {/* <p>{bloodPressure.time.toString()}</p> */}
+                                        <p>{bloodPressure.time.toString()}</p>
                                         <p>{bloodPressure.value1} / {bloodPressure.value2}</p>
                                         <p>{bloodPressure.comment}</p>
                                         {/* <p>uid: {bloodPressure.uid}</p> */}
                                     </div>
-                                    <div className="btn-bp">
+                                    <div className="btn-box">
                                         <button className="" onClick={() => { deleteBloodPressure(bloodPressure.id); }} >
                                             <span className="material-icons-round">
                                                 delete

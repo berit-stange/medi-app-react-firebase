@@ -25,13 +25,18 @@ function App() {
     // user ? <BloodPressureContainer /> : <GoogleLogin />
     user ?
 
-      <BrowserRouter>
+      <BrowserRouter >
+        <div className="welcome">
+          Hallo {auth.currentUser.email}!
+        </div>
         <Navigation />
-        <Routes>
+
+        <Routes basename="medication-counter-app-react">
           <Route exact path="/" element={<DayView />} />
           <Route exact path="medication-list" element={<MedicationList />} />
           <Route exact path="blood-pressure" element={<BloodPressureContainer />} />
         </Routes>
+
       </BrowserRouter>
       : <GoogleLogin />
   );

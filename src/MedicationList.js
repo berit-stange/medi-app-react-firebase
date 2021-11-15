@@ -1,5 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from "react";
+import { auth } from './firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 // import { auth } from './firebase';
 import { db } from "./firebase-config";
@@ -19,6 +21,7 @@ import {
 
 const MedicationList = () => {
 
+    const [user] = useAuthState(auth);
     const [title, setNewTitle] = useState("");
     const [body, setNewBody] = useState("");
     const [medication, setMedication] = useState([]);
@@ -73,7 +76,10 @@ const MedicationList = () => {
             );
         };
         getMedication();
-    }, []);
+    }, [
+        user,
+        mediCollectionRef
+    ]);
 
     // useEffect(() => {
     //     const mediCollectionRef = collection(db, "medication");
@@ -91,40 +97,39 @@ const MedicationList = () => {
     return (
 
         <div>
-
             <div>
                 <div className="blood-pressure-input-box">
                     <div className="blood-pressure-input">
                         <div className="blood-pressure-values">
                             <input
-                                placeholder="Medication..."
+                                placeholder="Medikament..."
                                 onChange={(event) => {
                                     setNewTitle(event.target.value);
                                 }}
                             />
                             <input
                                 // type="number"
-                                placeholder="Take at..."
+                                placeholder="Dosierung"
                                 onChange={(event) => {
                                     setNewBody(event.target.value);
                                 }}
                             />
                         </div>
-                        <div className="btn-bp">
+                        <div className="btn-box">
                             <button className="btn-add-med" onClick={createMedi}>+</button>
                         </div>
                     </div>
 
                     <div>
-                        <h2>Medication List</h2>
+                        <h2>Medi List</h2>
                         {medication.map((medication) => {
                             return (
-                                <div className="blood-pressure-list-item" key={medication.id}>
+                                <div className="medi-list-item" key={medication.id}>
                                     <div>
-                                        <p>Medication: {medication.title} / {medication.body}</p>
+                                        <p>{medication.title} / {medication.body}</p>
                                         {/* <p>{medication.time.toString()}</p> */}
                                     </div>
-                                    <div className="btn-bp">
+                                    <div className="btn-box btn-med-delete">
                                         <button onClick={() => { deleteMedication(medication.id); }} >
                                             <span className="material-icons-round">
                                                 delete

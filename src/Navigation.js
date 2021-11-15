@@ -15,10 +15,6 @@ function Navigation() {
     return (
         <div>
 
-            <div className="welcome">
-                Welcome {auth.currentUser.email}!
-            </div>
-
             <div className="nav-container">
 
                 <div>
@@ -27,13 +23,13 @@ function Navigation() {
 
                 <ul>
                     <Link to="blood-pressure">
-                        <li>Blood Pressure</li>
+                        <li>Blutdruck</li>
                     </Link>
                     <Link to="medication-list">
-                        <li>Medication</li>
+                        <li>Medis</li>
                     </Link>
                     <Link to="/">
-                        <li>Day</li>
+                        <li>Heute</li>
                     </Link>
                 </ul>
 
