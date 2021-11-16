@@ -26,21 +26,25 @@ const BloodPressureContainer = () => {
     const [user] = useAuthState(auth);
     const [value1, setBloodPressureValue1] = useState("");
     const [value2, setBloodPressureValue2] = useState("");
-    const [comment, setBloodPressureComment] = useState("");
+    const [comment, setBloodPressureComment] = useState("banana");
     const [bloodPressure, setBloodPressure] = useState([]);
     const bloodPressureCollectionRef = collection(db, "bloodPressure");
 
 
-    // const addBloodPressure = async () => {
-    //     const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
-    //     await addDoc(bloodPressureCollectionRef, {
-    //         value1: value1,
-    //         value2: value2,
-    //         comment: comment,
-    //         time: date,
-    //         timestamp: serverTimestamp(),
-    //         uid: user.uid
-    //     });
+    const addBloodPressure = async () => {
+        const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+        await addDoc(bloodPressureCollectionRef, {
+            value1: value1,
+            value2: value2,
+            comment: comment,
+            time: date,
+            timestamp: serverTimestamp(),
+            uid: user.uid
+        });
+    };
+
+    // const reset = () => {
+    //     setBloodPressureValue1();
     // };
 
     const deleteBloodPressure = async (id) => {
@@ -62,6 +66,21 @@ const BloodPressureContainer = () => {
     //     bloodPressureCollectionRef
     // ]);
 
+    // useEffect(() => {
+    //     const getBloodPressure = async () => {
+    //         const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
+    //         const querySnapshot = await getDocs(q);
+    //         setBloodPressure(querySnapshot.docs
+    //             .map((doc) => ({ ...doc.data(), id: doc.id }))
+    //         );
+    //     };
+    //     getBloodPressure();
+    //     // setBloodPressureValue1(""); //leert den Wert in der db
+    // }, [
+    //     user,
+    //     bloodPressureCollectionRef
+    // ]);
+
     useEffect(() => {
         const getBloodPressure = async () => {
             const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
@@ -69,34 +88,28 @@ const BloodPressureContainer = () => {
             setBloodPressure(querySnapshot.docs
                 .map((doc) => ({ ...doc.data(), id: doc.id }))
             );
-        };
+        }
         getBloodPressure();
-    }, [
-        user,
-        bloodPressureCollectionRef
-    ]);
+        console.log("OK")
+        // return function cleanup() {
+        //     setBloodPressure();
+        // };
 
-    // useEffect(() => {
-    //     const getBloodPressure = async () => {
-    //         const bloodPressureCollectionRef = collection(db, "bloodPressure");
-    //         const data = await getDocs(bloodPressureCollectionRef);
-    //         setBloodPressure(data.docs
-    //             .map((doc) => ({ ...doc.data(), id: doc.id }))
-    //         );
-    //     };
-    //     getBloodPressure();
-    // }, [
-    //     user,
-    //     bloodPressureCollectionRef
-    // ]);
+    },
+        // console.log("OK"), //loggt 3000 x pro Sekunde
+        [
+            user,
+            bloodPressureCollectionRef
+        ]);
+
 
 
     return (
         <div>
 
             <div>
-                {/* <h2>Add Blood Pressure</h2> */}
-                {/* <div className="blood-pressure-input-box">
+                <h2>Add Blood Pressure</h2>
+                <div className="blood-pressure-input-box">
                     <div className="blood-pressure-input">
                         <div className="blood-pressure-values">
                             <input
@@ -120,12 +133,14 @@ const BloodPressureContainer = () => {
                                 }}
                             />
                             <div className="btn-bp">
-                                <button className="btn-add-bp"
-                                    onClick={addBloodPressure} >+</button>
+                                <button className="btn-add-bp" onClick={addBloodPressure} >+</button>
+                            </div>
+                            <div className="btn-bp">
+                                <button className="btn-add-bp"  >!!!</button>
                             </div>
                         </div>
                     </div>
-                </div> */}
+                </div>
 
                 <div>
                     <h2>Blutdruck Aufzeichnung</h2>

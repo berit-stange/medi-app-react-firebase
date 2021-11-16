@@ -2,7 +2,7 @@ import React from 'react';
 import { auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { useState, useEffect } from "react";
+import { useState/* , useEffect */ } from "react";
 
 import { db } from "./firebase-config";
 
@@ -31,6 +31,7 @@ const BloodPressureInput = () => {
     const bloodPressureCollectionRef = collection(db, "bloodPressure");
 
 
+
     const addBloodPressure = async () => {
         const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         await addDoc(bloodPressureCollectionRef, {
@@ -57,6 +58,10 @@ const BloodPressureInput = () => {
     //     user,
     //     bloodPressureCollectionRef
     // ]);
+
+
+
+
 
 
 
