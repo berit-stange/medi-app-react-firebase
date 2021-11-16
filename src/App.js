@@ -5,12 +5,12 @@ import Navigation from './Navigation';
 import DayView from './DayView';
 import MedicationList from './MedicationList';
 import BloodPressureContainer from './BloodPressureContainer';
+// import { BloodPressureContainerClassComp } from './BloodPressureContainerClassComp';
 
 import { auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import GoogleLogin from './GoogleLogin';
 import MainPage from './MainPage';
-// import BloodPressureContainer from './BloodPressureContainer';
 
 // import { useState, useEffect } from "react";
 import "./App.css";
@@ -37,6 +37,7 @@ function App() {
           <Route exact path="medi-app-react-firebase/today" element={<DayView />} />
           <Route exact path="medi-app-react-firebase/medication-list" element={<MedicationList />} />
           <Route exact path="medi-app-react-firebase/blood-pressure" element={<BloodPressureContainer />} />
+          {/* <Route exact path="medi-app-react-firebase/blood-pressure" element={<BloodPressureContainerClassComp />} /> */}
         </Routes>
 
       </BrowserRouter>

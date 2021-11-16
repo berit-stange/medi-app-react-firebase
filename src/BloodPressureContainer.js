@@ -30,17 +30,59 @@ const BloodPressureContainer = () => {
     const [bloodPressure, setBloodPressure] = useState([]);
     const bloodPressureCollectionRef = collection(db, "bloodPressure");
 
+    // const getBloodPressure = () => {
+    //     const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
+    //     const querySnapshot = getDocs(q);
+    //     setBloodPressure(querySnapshot.docs
+    //         .map((doc) => ({ ...doc.data(), id: doc.id }))
+    //     );
+    //     console.log("OK")
+    // }
+    //     // getBloodPressure();
+    //     // return function cleanup() {
+    //     //     setBloodPressure();
+    //     // };
+    //     // ,
+    //     // [
+    //     //     user,
+    //     //     bloodPressureCollectionRef
+    //     // ]
+    //     ;
 
-    const addBloodPressure = async () => {
+
+    // const addBloodPressure = async () => {
+    //     const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+    //     await addDoc(bloodPressureCollectionRef, {
+    //         value1: value1,
+    //         value2: value2,
+    //         comment: comment,
+    //         time: date,
+    //         timestamp: serverTimestamp(),
+    //         uid: user.uid
+    //     });
+    // };
+
+    const addBloodPressure = (e) => {
+        // e.preventDefault();
         const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
-        await addDoc(bloodPressureCollectionRef, {
+        addDoc(bloodPressureCollectionRef, {
             value1: value1,
             value2: value2,
             comment: comment,
             time: date,
             timestamp: serverTimestamp(),
             uid: user.uid
-        });
+        })
+        // .then(() => {
+        //     const data = value1;
+        //     console.log(data);
+        //     // getBloodPressure();
+
+        //     // window.open('blood-pressure', '_self'); //self: page will open in the current tab
+        // })
+        // .catch(e => {
+        //     console.log('error at addBloodPressure')
+        // });
     };
 
     // const reset = () => {
@@ -75,33 +117,39 @@ const BloodPressureContainer = () => {
     //         );
     //     };
     //     getBloodPressure();
+    //     console.log("OK"); //loggt ca. 3000 x pro Sekunde
     //     // setBloodPressureValue1(""); //leert den Wert in der db
     // }, [
     //     user,
     //     bloodPressureCollectionRef
+    //     //wenn leer, dann wird's noch richtig geadded, aber es aktualisiert nicht die Liste
     // ]);
+
+
 
     useEffect(() => {
         const getBloodPressure = async () => {
             const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
             const querySnapshot = await getDocs(q);
-            setBloodPressure(querySnapshot.docs
-                .map((doc) => ({ ...doc.data(), id: doc.id }))
-            );
-        }
-        getBloodPressure();
-        console.log("OK")
-        // return function cleanup() {
-        //     setBloodPressure();
-        // };
-
+            // let timer = setTimeout(() => {
+            setBloodPressure(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+            // }, 1000);
+            // return () => clearTimeout(timer); //soll den infinite loop clearen, funktioniert aber nicht
+        };
+        // getBloodPressure();
     },
-        // console.log("OK"), //loggt 3000 x pro Sekunde
+        console.log("OK"), //loggt ca. 3000 x pro Sekunde
         [
-            user,
-            bloodPressureCollectionRef
+            // user,
+            // bloodPressureCollectionRef //mit dependencies loopt es ewig weiter
+            // bloodPressure
+            // bloodPressure
+            // getBloodPressure
+            //wenn leer, dann wird's noch richtig geadded, aber es aktualisiert nicht die Liste
         ]);
-
+    //https://reactjs.org/docs/hooks-effect.html
+    //https://www.w3schools.com/react/react_useeffect.asp
+    //https://reactjs.org/docs/hooks-effect.html
 
 
     return (
