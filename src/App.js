@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from './Navigation';
 // import MainPage from './MainPage';
-import DayView from './DayView';
+// import DayView from './DayView';
 import MedicationList from './MedicationList';
 // import BloodPressureContainer from './BloodPressureContainer';
 import { BloodPressureContainerClassComp } from './BloodPressureContainerClassComp';
@@ -21,8 +21,7 @@ function App() {
   const [user] = useAuthState(auth);
 
   return (
-    // user ? <MainPage /> : <GoogleLogin />
-    // user ? <BloodPressureContainer /> : <GoogleLogin />
+
     user ?
 
       <BrowserRouter >
@@ -30,7 +29,6 @@ function App() {
           Hallo {auth.currentUser.email}!
         </div>
         <Navigation />
-
         <Routes >
           {/* <Routes basename="medication-counter-app-react"> */}
           <Route exact path="medi-app-react-firebase" element={<MainPage />} />
@@ -39,8 +37,8 @@ function App() {
           {/* <Route exact path="medi-app-react-firebase/blood-pressure" element={<BloodPressureContainer />} /> */}
           <Route exact path="medi-app-react-firebase/blood-pressure" element={<BloodPressureContainerClassComp />} />
         </Routes>
-
       </BrowserRouter>
+
       : <GoogleLogin />
   );
 }

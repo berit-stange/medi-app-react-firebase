@@ -12,13 +12,13 @@ import {
     doc,
     // onSnapshot,
     // orderBy,
-    serverTimestamp,
+    // serverTimestamp,
     query,
     where
 } from "firebase/firestore";
 
 
-
+const bloodPressureCollectionRef = collection(db, "bloodPressure");
 
 export class BloodPressureContainerClassComp extends React.Component {
 
@@ -34,36 +34,33 @@ export class BloodPressureContainerClassComp extends React.Component {
             timestamp: null,
             uid: 0
         };
-        this.bloodPressureCollectionRef = collection(db, "bloodPressure");
+        // this.bloodPressureCollectionRef = collection(db, "bloodPressure");
     }
 
-
     addBloodPressure = async () => {
-        const bloodPressureCollectionRef = collection(db, "bloodPressure");
-        const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+        const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+        const dateSorting = new Date().toISOString();
         const { value1, value2, comment } = this.state;
         await addDoc(bloodPressureCollectionRef, {
             value1: value1,
             value2: value2,
             comment: comment,
-            time: date,
-            timestamp: serverTimestamp(),
+            time: dateDisplay,
+            // timestamp: serverTimestamp(),
+            timestamp: dateSorting,
             uid: this.state.uid
         });
         window.open('/medi-app-react-firebase/blood-pressure', '_self');
     }
 
     deleteBloodPressure = async (id) => {
-        const bloodPressureDoc = doc(db, "bloodPressure", id);
-        await deleteDoc(bloodPressureDoc);
+        const bloodPressureCollectionRef = doc(db, "bloodPressure", id);
+        await deleteDoc(bloodPressureCollectionRef);
         window.open('/medi-app-react-firebase/blood-pressure', '_self');
     };
 
-
-
     async getBloodPressure() {
         try {
-            const bloodPressureCollectionRef = collection(db, "bloodPressure");
             const uid = localStorage.getItem("uid"); //warum funktioniert es nicht mit this.state.uid? 
             const q = query(bloodPressureCollectionRef, where("uid", "==", uid));
             const bloodPressure = await getDocs(q);
@@ -76,8 +73,8 @@ export class BloodPressureContainerClassComp extends React.Component {
         } catch (error) {
             console.log(error);
         }
+        console.log(this.state.bloodPressure[0]);
     }
-
 
     componentDidMount() {
         this.setState({
@@ -88,7 +85,6 @@ export class BloodPressureContainerClassComp extends React.Component {
         });
         this.getBloodPressure();
     };
-
 
     render() {
         const { bloodPressure } = this.state;
@@ -109,7 +105,6 @@ export class BloodPressureContainerClassComp extends React.Component {
                                 <input
                                     placeholder="value 2"
                                     onChange={event => this.setState({ value2: event.target.value })}
-
                                 />
                             </div>
                             <div className="blood-pressure-comment">
@@ -119,9 +114,6 @@ export class BloodPressureContainerClassComp extends React.Component {
                                 />
                                 <div className="btn-bp">
                                     <button className="btn-add-bp" onClick={event => this.addBloodPressure(event)} >+</button>
-                                </div>
-                                <div className="btn-bp">
-                                    <button className="btn-add-bp"  >!!!</button>
                                 </div>
                             </div>
                         </div>
@@ -136,8 +128,9 @@ export class BloodPressureContainerClassComp extends React.Component {
                                     <div className="blood-pressure-list-item" key={bp.id}>
                                         <div>
                                             <p>{bp.time.toString()}</p>
+                                            {/* <p>{bp.timestamp}</p> */}
                                             <p>{bp.value1} /{bp.value2}</p>
-                                            <p>{bp.comment}</p>
+                                            {/* <p>{bp.comment}</p> */}
                                             {/* <p>uid: {bp.uid}</p> */}
                                         </div>
                                         <div className="btn-box">
