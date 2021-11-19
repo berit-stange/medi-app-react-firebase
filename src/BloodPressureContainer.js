@@ -62,7 +62,7 @@ const BloodPressureContainer = () => {
     //     });
     // };
 
-    const addBloodPressure = (e) => {
+    const addBloodPressure = () => {
         // e.preventDefault();
         const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         addDoc(bloodPressureCollectionRef, {
@@ -108,45 +108,45 @@ const BloodPressureContainer = () => {
     //     bloodPressureCollectionRef
     // ]);
 
-    // useEffect(() => {
-    //     const getBloodPressure = async () => {
-    //         const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
-    //         const querySnapshot = await getDocs(q);
-    //         setBloodPressure(querySnapshot.docs
-    //             .map((doc) => ({ ...doc.data(), id: doc.id }))
-    //         );
-    //     };
-    //     getBloodPressure();
-    //     console.log("OK"); //loggt ca. 3000 x pro Sekunde
-    //     // setBloodPressureValue1(""); //leert den Wert in der db
-    // }, [
-    //     user,
-    //     bloodPressureCollectionRef
-    //     //wenn leer, dann wird's noch richtig geadded, aber es aktualisiert nicht die Liste
-    // ]);
-
-
-
     useEffect(() => {
         const getBloodPressure = async () => {
             const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
             const querySnapshot = await getDocs(q);
-            // let timer = setTimeout(() => {
-            setBloodPressure(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-            // }, 1000);
-            // return () => clearTimeout(timer); //soll den infinite loop clearen, funktioniert aber nicht
+            setBloodPressure(querySnapshot.docs
+                .map((doc) => ({ ...doc.data(), id: doc.id }))
+            );
         };
-        // getBloodPressure();
-    },
-        console.log("OK"), //loggt ca. 3000 x pro Sekunde
-        [
-            // user,
-            // bloodPressureCollectionRef //mit dependencies loopt es ewig weiter
-            // bloodPressure
-            // bloodPressure
-            // getBloodPressure
-            //wenn leer, dann wird's noch richtig geadded, aber es aktualisiert nicht die Liste
-        ]);
+        getBloodPressure();
+        console.log("OK"); //loggt ca. 3000 x pro Sekunde
+        // setBloodPressureValue1(""); //leert den Wert in der db
+    }, [
+        user.uid,
+        bloodPressureCollectionRef
+        //wenn leer, dann wird's noch richtig geadded, aber es aktualisiert nicht die Liste
+    ]);
+
+
+
+    // useEffect(() => {
+    //     const getBloodPressure = async () => {
+    //         const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
+    //         const querySnapshot = await getDocs(q);
+    //         let timer = setTimeout(() => {
+    //             setBloodPressure(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    //         }, 1000);
+    //         return () => clearTimeout(timer); //soll den infinite loop clearen, funktioniert aber nicht
+    //     };
+    //     // getBloodPressure();
+    // },
+    //     console.log("OK"), //loggt ca. 3000 x pro Sekunde
+    //     [
+    //         // user,
+    //         // bloodPressureCollectionRef //mit dependencies loopt es ewig weiter
+    //         // bloodPressure
+    //         // bloodPressure
+    //         // getBloodPressure
+    //         //wenn leer, dann wird's noch richtig geadded, aber es aktualisiert nicht die Liste
+    //     ]);
     //https://reactjs.org/docs/hooks-effect.html
     //https://www.w3schools.com/react/react_useeffect.asp
     //https://reactjs.org/docs/hooks-effect.html

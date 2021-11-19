@@ -28,9 +28,9 @@ function Navigation() {
                     <Link to="medi-app-react-firebase/medication-list">
                         <li>Medis</li>
                     </Link>
-                    <Link to="medi-app-react-firebase/today">
+                    {/* <Link to="medi-app-react-firebase/today">
                         <li>Heute</li>
-                    </Link>
+                    </Link> */}
                 </ul>
 
             </div>
