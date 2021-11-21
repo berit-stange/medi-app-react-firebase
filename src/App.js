@@ -10,7 +10,7 @@ import { BloodPressureContainerClassComp } from './BloodPressureContainerClassCo
 import { auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import GoogleLogin from './GoogleLogin';
-import MainPage from './MainPage';
+
 
 // import { useState, useEffect } from "react";
 import "./App.css";
@@ -31,7 +31,7 @@ function App() {
         <Navigation />
         <Routes >
           {/* <Routes basename="medication-counter-app-react"> */}
-          <Route exact path="medi-app-react-firebase" element={<MainPage />} />
+          {/* <Route exact path="medi-app-react-firebase" element={<MainPage />} /> */}
           {/* <Route exact path="medi-app-react-firebase/today" element={<DayView />} /> */}
           <Route exact path="medi-app-react-firebase/medication-list" element={<MedicationList />} />
           {/* <Route exact path="medi-app-react-firebase/blood-pressure" element={<BloodPressureContainer />} /> */}
