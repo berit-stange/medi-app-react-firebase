@@ -30,12 +30,8 @@ function App() {
         </div>
         <Navigation />
         <Routes >
-          {/* <Routes basename="medication-counter-app-react"> */}
           <Route exact path="/" element={<BloodPressureContainerClassComp />} />
-          {/* <Route exact path="medi-app-react-firebase" element={<MainPage />} /> */}
-          {/* <Route exact path="medi-app-react-firebase/today" element={<DayView />} /> */}
           <Route exact path="/medication-list" element={<MedicationList />} />
-          {/* <Route exact path="medi-app-react-firebase/blood-pressure" element={<BloodPressureContainer />} /> */}
           <Route exact path="/blood-pressure" element={<BloodPressureContainerClassComp />} />
         </Routes>
       </BrowserRouter>
