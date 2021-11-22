@@ -27,4 +27,3 @@ firebase.js
 /.firebase
 .firebaserc
 firebase.json
-/.netlify

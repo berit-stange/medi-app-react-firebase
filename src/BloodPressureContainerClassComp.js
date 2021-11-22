@@ -50,13 +50,13 @@ export class BloodPressureContainerClassComp extends React.Component {
             timestamp: dateSorting,
             uid: this.state.uid
         });
-        window.open('/medi-app-react-firebase/blood-pressure', '_self');
+        window.open('/blood-pressure', '_self');
     }
 
     deleteBloodPressure = async (id) => {
         const bloodPressureCollectionRef = doc(db, "bloodPressure", id);
         await deleteDoc(bloodPressureCollectionRef);
-        window.open('/medi-app-react-firebase/blood-pressure', '_self');
+        window.open('/blood-pressure', '_self');
     };
 
     async getBloodPressure() {
