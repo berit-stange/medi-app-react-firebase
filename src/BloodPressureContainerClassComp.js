@@ -130,7 +130,7 @@ export class BloodPressureContainerClassComp extends React.Component {
                                             <p>{bp.time.toString()}</p>
                                             {/* <p>{bp.timestamp}</p> */}
                                             <p>{bp.value1} /{bp.value2}</p>
-                                            {/* <p>{bp.comment}</p> */}
+                                            <p>{bp.comment}</p>
                                             {/* <p>uid: {bp.uid}</p> */}
                                         </div>
                                         <div className="btn-box">
