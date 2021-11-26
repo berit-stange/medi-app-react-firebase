@@ -3,8 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from './Navigation';
 // import MainPage from './MainPage';
 // import DayView from './DayView';
-import MedicationList from './MedicationList';
-// import BloodPressureContainer from './BloodPressureContainer';
+// import MedicationList from './MedicationList';
+import { MedicationListClassComponent } from './MedicationListClassComponent';
+import BloodPressureContainer from './BloodPressureContainer';
 import { BloodPressureContainerClassComp } from './BloodPressureContainerClassComp';
 
 import { auth } from './firebase';
@@ -30,9 +31,11 @@ function App() {
         </div>
         <Navigation />
         <Routes >
-          <Route exact path="/" element={<BloodPressureContainerClassComp />} />
-          <Route exact path="/medication-list" element={<MedicationList />} />
+          <Route exact path="/" element={<MedicationListClassComponent />} />
+          {/* <Route exact path="/medication-list" element={<MedicationList />} /> */}
+          <Route exact path="/medication" element={<MedicationListClassComponent />} />
           <Route exact path="/blood-pressure" element={<BloodPressureContainerClassComp />} />
+          {/* <Route exact path="/blood-pressure-func" element={<BloodPressureContainer />} /> */}
         </Routes>
       </BrowserRouter>
 

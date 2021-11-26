@@ -25,11 +25,11 @@ function Navigation() {
                     <Link to="/blood-pressure">
                         <li>Blutdruck</li>
                     </Link>
-                    <Link to="/medication-list">
+                    <Link to="/medication">
                         <li>Medis</li>
                     </Link>
-                    {/* <Link to="medi-app-react-firebase/today">
-                        <li>Heute</li>
+                    {/* <Link to="/blood-pressure-func">
+                        <li>BP-Func</li>
                     </Link> */}
                 </ul>
 

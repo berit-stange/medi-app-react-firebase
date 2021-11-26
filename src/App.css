@@ -231,9 +231,9 @@ button {
   background-color: #80ecda;
   font-size: 1rem;
   font-weight: 600;
-  margin: 0 0 0 1rem;
-  height: 3em;
-  width: 3em;
+  height: 4em;
+  width: 4em;
+  margin: 0 0 0 0.2rem;
 }
 
 .btn-add-bp {
@@ -269,9 +269,83 @@ button {
   text-align: left;
 }
 
+.medi-title {
+  background-color: #27336b;
+  border: none;
+  border-radius: 0.5em;
+  color: #80ecda;
+  font-weight: 400;
+  height: 2.5em;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  width: 25%;
+}
+
 .btn-med-delete {
   -ms-flex-item-align: baseline;
       align-self: baseline;
+}
+
+.medi-input-box {
+  border-radius: 0.5em;
+  padding: .5em;
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.medi-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  max-height: 70px;
+}
+
+.medi-values {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.medi-comment {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 0;
 }
 
 .btn-login {

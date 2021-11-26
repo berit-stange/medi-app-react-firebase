@@ -50,40 +50,41 @@ const BloodPressureContainer = () => {
     //     ;
 
 
-    // const addBloodPressure = async () => {
+    const addBloodPressure = async () => {
+        const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+        const dateSorting = new Date().toISOString();
+        await addDoc(bloodPressureCollectionRef, {
+            value1: value1,
+            value2: value2,
+            comment: comment,
+            time: date,
+            timestamp: dateSorting,
+            uid: user.uid
+        });
+    };
+
+    // const addBloodPressure = () => {
+    //     // e.preventDefault();
     //     const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
-    //     await addDoc(bloodPressureCollectionRef, {
+    //     addDoc(bloodPressureCollectionRef, {
     //         value1: value1,
     //         value2: value2,
     //         comment: comment,
     //         time: date,
     //         timestamp: serverTimestamp(),
     //         uid: user.uid
-    //     });
+    //     })
+    //     // .then(() => {
+    //     //     const data = value1;
+    //     //     console.log(data);
+    //     //     // getBloodPressure();
+
+    //     //     // window.open('blood-pressure', '_self'); //self: page will open in the current tab
+    //     // })
+    //     // .catch(e => {
+    //     //     console.log('error at addBloodPressure')
+    //     // });
     // };
-
-    const addBloodPressure = () => {
-        // e.preventDefault();
-        const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
-        addDoc(bloodPressureCollectionRef, {
-            value1: value1,
-            value2: value2,
-            comment: comment,
-            time: date,
-            timestamp: serverTimestamp(),
-            uid: user.uid
-        })
-        // .then(() => {
-        //     const data = value1;
-        //     console.log(data);
-        //     // getBloodPressure();
-
-        //     // window.open('blood-pressure', '_self'); //self: page will open in the current tab
-        // })
-        // .catch(e => {
-        //     console.log('error at addBloodPressure')
-        // });
-    };
 
     // const reset = () => {
     //     setBloodPressureValue1();
@@ -103,7 +104,7 @@ const BloodPressureContainer = () => {
     //     // setTimeout(() => {
     //     //     unsub();
     //     // }, 1000);
-    // }, [
+    // }, [ 
     //     user,
     //     bloodPressureCollectionRef
     // ]);
@@ -116,13 +117,12 @@ const BloodPressureContainer = () => {
                 .map((doc) => ({ ...doc.data(), id: doc.id }))
             );
         };
-        getBloodPressure();
+        getBloodPressure()
+            .catch(console.error);
         console.log("OK"); //loggt ca. 3000 x pro Sekunde
-        // setBloodPressureValue1(""); //leert den Wert in der db
     }, [
-        user.uid,
+        user.uid, //wenn array leer, dann wird's noch richtig geadded, aber es aktualisiert nicht die Liste
         bloodPressureCollectionRef
-        //wenn leer, dann wird's noch richtig geadded, aber es aktualisiert nicht die Liste
     ]);
 
 
@@ -149,7 +149,6 @@ const BloodPressureContainer = () => {
     //     ]);
     //https://reactjs.org/docs/hooks-effect.html
     //https://www.w3schools.com/react/react_useeffect.asp
-    //https://reactjs.org/docs/hooks-effect.html
 
 
     return (

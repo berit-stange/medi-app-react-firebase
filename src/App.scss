@@ -212,9 +212,9 @@ button {
     background-color: $accent-color;
     font-size: $font-small;
     font-weight: $font-heavy;
-    margin: 0 0 0 1rem;
-    height: 3em;
-    width: 3em;
+    height: 4em;
+    width: 4em;
+    margin: 0 0 0 0.2rem;
 }
 
 .btn-add-bp {
@@ -246,8 +246,53 @@ button {
     text-align: left;
 }
 
+.medi-title {
+    background-color: $dark-color;
+    border: none;
+    border-radius: 0.5em;
+    color: $accent-color;
+    // font-size: $font-small;
+    font-weight: $font-regular;
+    height: 2.5em;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    width: 25%;
+}
+
 .btn-med-delete {
     align-self: baseline;
+}
+
+.medi-input-box {
+    border-radius: 0.5em;
+    padding: .5em;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.medi-input {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: stretch;
+    max-height: 70px;
+}
+
+.medi-values {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.medi-comment {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
 }
 
 .btn-login {

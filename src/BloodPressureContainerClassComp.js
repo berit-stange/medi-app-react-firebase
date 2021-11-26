@@ -73,7 +73,7 @@ export class BloodPressureContainerClassComp extends React.Component {
         } catch (error) {
             console.log(error);
         }
-        console.log(this.state.bloodPressure[0]);
+        console.log(this.state.bloodPressure);
     }
 
     componentDidMount() {
