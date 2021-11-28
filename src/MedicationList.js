@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
@@ -27,7 +27,9 @@ const MedicationList = () => {
     // const [body] = useState("");
     const [comment, setComment] = useState("");
     const [medication, setMedication] = useState([]);
-    const mediCollectionRef = collection(db, "medication");
+    // const mediCollectionRef = collection(db, "medication");
+    const mediCollectionRef = useRef(collection(db, "medication"));
+
 
     // const createMedi = async () => {
     //     const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
@@ -41,53 +43,49 @@ const MedicationList = () => {
     const addAxi = async () => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
-        await addDoc(mediCollectionRef, {
+        await addDoc(mediCollectionRef.current, {
             title: "Axitinib",
             comment: comment,
             time: dateDisplay,
             timestamp: dateSorting,
             uid: user.uid
         });
-        // window.open('/medication', '_self');
     };
 
     const addNovo = async () => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
-        await addDoc(mediCollectionRef, {
+        await addDoc(mediCollectionRef.current, {
             title: "Novaminsulfon",
             comment: comment,
             time: dateDisplay,
             timestamp: dateSorting,
             uid: user.uid
         });
-        // window.open('/medication', '_self');
     }
 
     const addPara = async () => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
-        await addDoc(mediCollectionRef, {
+        await addDoc(mediCollectionRef.current, {
             title: "Paracethamol",
             comment: comment,
             time: dateDisplay,
             timestamp: dateSorting,
             uid: user.uid
         });
-        // window.open('/medication', '_self');
     }
 
     const addTrama = async () => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
-        await addDoc(mediCollectionRef, {
+        await addDoc(mediCollectionRef.current, {
             title: "Tramadol",
             comment: comment,
             time: dateDisplay,
             timestamp: dateSorting,
             uid: user.uid
         });
-        // window.open('/medication', '_self');
     }
 
     const deleteMedication = async (id) => {
@@ -132,14 +130,15 @@ const MedicationList = () => {
     // }, []);
 
     useEffect(() => {
-        const q = query(mediCollectionRef, where("uid", "==", user.uid));
+        // const q = query(mediCollectionRef, where("uid", "==", user.uid));
+        const q = query(mediCollectionRef.current, where("uid", "==", user.uid));
         const handleSnapshot = (snapshot) => {
             setMedication(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
         };
         getDocs(q).then(handleSnapshot);
         console.log("ok");
-        return onSnapshot(q, mediCollectionRef, handleSnapshot)
-    }, [user.uid]);
+        return onSnapshot(q, mediCollectionRef.current, handleSnapshot)
+    }, [user.uid, mediCollectionRef]);
 
     return (
 
@@ -231,23 +230,25 @@ const MedicationList = () => {
 
                     <div>
                         <h2>Medi List</h2>
-                        {medication.map((medication) => {
-                            return (
-                                <div className="medi-list-item" key={medication.id}>
-                                    <div>
-                                        <p>{medication.time.toString()}</p>
-                                        <p>{medication.title} - {medication.comment}</p>
+                        {medication
+                            .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
+                            .map((medication) => {
+                                return (
+                                    <div className="medi-list-item" key={medication.id}>
+                                        <div>
+                                            <p>{medication.time.toString()}</p>
+                                            <p>{medication.title} - {medication.comment}</p>
+                                        </div>
+                                        <div className="btn-box btn-med-delete">
+                                            <button onClick={() => { deleteMedication(medication.id); }} >
+                                                <span className="material-icons-round">
+                                                    delete
+                                                </span>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div className="btn-box btn-med-delete">
-                                        <button onClick={() => { deleteMedication(medication.id); }} >
-                                            <span className="material-icons-round">
-                                                delete
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            );
-                        })}
+                                );
+                            })}
                     </div>
                 </div>
             </div>

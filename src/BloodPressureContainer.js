@@ -2,7 +2,7 @@ import React from 'react';
 import { auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { db } from "./firebase-config";
 
@@ -29,13 +29,14 @@ const BloodPressureContainer = () => {
     const [comment, setBloodPressureComment] = useState("no comment");
     const [bloodPressure, setBloodPressure] = useState([]);
     // const [bloodPressure, setBloodPressure] = useState({ value1: "", value2: "", comment: "", time: "", timestamp: "" });
-    const bloodPressureCollectionRef = collection(db, "bloodPressure");
+    // const bloodPressureCollectionRef = collection(db, "bloodPressure");
+    const bloodPressureCollectionRef = useRef(collection(db, "bloodPressure"));
 
 
     const addBloodPressure = async () => {
         const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
-        await addDoc(bloodPressureCollectionRef, {
+        await addDoc(bloodPressureCollectionRef.current, {
             value1: value1,
             value2: value2,
             comment: comment,
@@ -145,15 +146,16 @@ const BloodPressureContainer = () => {
     // };
 
     useEffect(() => {
-        const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
+        // const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
+        const q = query(bloodPressureCollectionRef.current, where("uid", "==", user.uid));
 
         const handleSnapshot = (snapshot) => {
             setBloodPressure(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
         };
         getDocs(q).then(handleSnapshot);
 
-        return onSnapshot(q, bloodPressureCollectionRef, handleSnapshot)
-    }, [user.uid]);
+        return onSnapshot(q, bloodPressureCollectionRef.current, handleSnapshot)
+    }, [user.uid, bloodPressureCollectionRef]);
 
 
 
