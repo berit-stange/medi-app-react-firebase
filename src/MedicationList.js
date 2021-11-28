@@ -13,44 +13,82 @@ import {
     // updateDoc,
     deleteDoc,
     doc,
-    // onSnapshot,
+    onSnapshot,
     // orderBy,
-    // query
+    query,
+    where
 } from "firebase/firestore";
 
 
 const MedicationList = () => {
 
     const [user] = useAuthState(auth);
-    const [title, setNewTitle] = useState("");
-    const [body, setNewBody] = useState("");
+    // const [title] = useState("");
+    // const [body] = useState("");
+    const [comment, setComment] = useState("");
     const [medication, setMedication] = useState([]);
     const mediCollectionRef = collection(db, "medication");
 
-    const createMedi = async () => {
-        const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+    // const createMedi = async () => {
+    //     const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+    //     await addDoc(mediCollectionRef, {
+    //         title: title,
+    //         body: body,
+    //         time: date
+    //     });
+    // };
+
+    const addAxi = async () => {
+        const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+        const dateSorting = new Date().toISOString();
         await addDoc(mediCollectionRef, {
-            title: title,
-            body: body,
-            time: date
+            title: "Axitinib",
+            comment: comment,
+            time: dateDisplay,
+            timestamp: dateSorting,
+            uid: user.uid
         });
+        // window.open('/medication', '_self');
     };
 
-    // const updateUser = async (id, lastName) => {
-    //   const userDoc = doc(db, "users", id);
-    //   const newFields = { lastName: lastName + 1 };
-    //   await updateDoc(userDoc, newFields);
-    // };
+    const addNovo = async () => {
+        const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+        const dateSorting = new Date().toISOString();
+        await addDoc(mediCollectionRef, {
+            title: "Novaminsulfon",
+            comment: comment,
+            time: dateDisplay,
+            timestamp: dateSorting,
+            uid: user.uid
+        });
+        // window.open('/medication', '_self');
+    }
 
-    // const updateMedication = async (id, lastName) => {
-    //     const medicationDoc = doc(db, "medication", id);
-    //     const newFields = {
-    //         title: title,
-    //         // createdAt: createdAt
-    //     };
-    //     // await updateDoc(medicationDoc, newFields);
-    //     await addDoc(medicationDoc, /* { createdAt: createdAt } */);
-    // };
+    const addPara = async () => {
+        const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+        const dateSorting = new Date().toISOString();
+        await addDoc(mediCollectionRef, {
+            title: "Paracethamol",
+            comment: comment,
+            time: dateDisplay,
+            timestamp: dateSorting,
+            uid: user.uid
+        });
+        // window.open('/medication', '_self');
+    }
+
+    const addTrama = async () => {
+        const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+        const dateSorting = new Date().toISOString();
+        await addDoc(mediCollectionRef, {
+            title: "Tramadol",
+            comment: comment,
+            time: dateDisplay,
+            timestamp: dateSorting,
+            uid: user.uid
+        });
+        // window.open('/medication', '_self');
+    }
 
     const deleteMedication = async (id) => {
         const medicationDoc = doc(db, "medication", id);
@@ -66,20 +104,20 @@ const MedicationList = () => {
     //     getMedication();
     // }, []);
 
-    useEffect(() => {
-        const getMedication = async () => {
-            const mediCollectionRef = collection(db, "medication");
-            const data = await getDocs(mediCollectionRef);
-            setMedication(data.docs
-                .map((doc) => ({ ...doc.data(), id: doc.id }))
-                .sort((a, b) => a.title > b.title ? 1 : -1)
-            );
-        };
-        getMedication();
-    }, [
-        user,
-        mediCollectionRef
-    ]);
+    // useEffect(() => {
+    //     const getMedication = async () => {
+    //         const mediCollectionRef = collection(db, "medication");
+    //         const data = await getDocs(mediCollectionRef);
+    //         setMedication(data.docs
+    //             .map((doc) => ({ ...doc.data(), id: doc.id }))
+    //             .sort((a, b) => a.title > b.title ? 1 : -1)
+    //         );
+    //     };
+    //     getMedication();
+    // }, [
+    //     user,
+    //     mediCollectionRef
+    // ]);
 
     // useEffect(() => {
     //     const mediCollectionRef = collection(db, "medication");
@@ -93,6 +131,15 @@ const MedicationList = () => {
     //     return unsub;
     // }, []);
 
+    useEffect(() => {
+        const q = query(mediCollectionRef, where("uid", "==", user.uid));
+        const handleSnapshot = (snapshot) => {
+            setMedication(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+        };
+        getDocs(q).then(handleSnapshot);
+        console.log("ok");
+        return onSnapshot(q, mediCollectionRef, handleSnapshot)
+    }, [user.uid]);
 
     return (
 
@@ -100,7 +147,7 @@ const MedicationList = () => {
             <div>
                 <div className="blood-pressure-input-box">
                     <div className="blood-pressure-input">
-                        <div className="blood-pressure-values">
+                        {/* <div className="blood-pressure-values">
                             <input
                                 placeholder="Medikament..."
                                 onChange={(event) => {
@@ -117,7 +164,69 @@ const MedicationList = () => {
                         </div>
                         <div className="btn-box">
                             <button className="btn-add-med" onClick={createMedi}>+</button>
+                        </div> */}
+
+
+                        <div className="medi-input">
+                            <div className="medi-values">
+                                <p className="medi-title">Axi</p>
+                                <input
+                                    placeholder="dose / comment"
+                                    onChange={(event) => {
+                                        setComment(event.target.value);
+                                    }}
+                                />
+                                <div className="">
+                                    <button className="btn-add-med" onClick={addAxi} >+</button>
+                                </div>
+                            </div>
                         </div>
+
+                        <div className="medi-input">
+                            <div className="medi-values">
+                                <p className="medi-title">Novo</p>
+                                <input
+                                    placeholder="dose / comment"
+                                    onChange={(event) => {
+                                        setComment(event.target.value);
+                                    }}
+                                />
+                                <div className="">
+                                    <button className="btn-add-med" onClick={addNovo} >+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="medi-input">
+                            <div className="medi-values">
+                                <p className="medi-title">Para</p>
+                                <input
+                                    placeholder="dose / comment"
+                                    onChange={(event) => {
+                                        setComment(event.target.value);
+                                    }}
+                                />
+                                <div className="">
+                                    <button className="btn-add-med" onClick={addPara} >+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="medi-input">
+                            <div className="medi-values">
+                                <p className="medi-title">Trama</p>
+                                <input
+                                    placeholder="dose / comment"
+                                    onChange={(event) => {
+                                        setComment(event.target.value);
+                                    }}
+                                />
+                                <div className="">
+                                    <button className="btn-add-med" onClick={addTrama} >+</button>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div>
@@ -126,8 +235,8 @@ const MedicationList = () => {
                             return (
                                 <div className="medi-list-item" key={medication.id}>
                                     <div>
-                                        <p>{medication.title} / {medication.body}</p>
-                                        {/* <p>{medication.time.toString()}</p> */}
+                                        <p>{medication.time.toString()}</p>
+                                        <p>{medication.title} - {medication.comment}</p>
                                     </div>
                                     <div className="btn-box btn-med-delete">
                                         <button onClick={() => { deleteMedication(medication.id); }} >

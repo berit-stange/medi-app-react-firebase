@@ -13,7 +13,7 @@ import {
     // updateDoc,
     deleteDoc,
     doc,
-    // onSnapshot,
+    onSnapshot,
     // orderBy,
     // serverTimestamp,
     query,
@@ -110,21 +110,50 @@ const BloodPressureContainer = () => {
     //https://reactjs.org/docs/hooks-effect.html
     //https://www.w3schools.com/react/react_useeffect.asp
 
-    const getBloodPressure = async () => {
-        const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
-        const querySnapshotResponse = await getDocs(q);
-        setBloodPressure(querySnapshotResponse.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-        );
-        console.log("1 - setBloodPressure");
-    };
+
+
+    // const getBloodPressure = async () => {
+    //     const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
+    //     const querySnapshotResponse = await getDocs(q);
+    //     // setBloodPressure(querySnapshotResponse.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    //     // );
+    //     // console.log("1 - setBloodPressure");
+    //     querySnapshotResponse.forEach((doc) => {
+    //         // doc.data() is never undefined for query doc snapshots
+    //         console.log(doc.id, " => ", ({ ...doc.data(), id: doc.id }));
+    //     });
+    // };
+
+    // useEffect(() => {
+    //     getBloodPressure();
+    //     console.log("2 - getBloodPressure"); //infinite loop!
+    // }, [
+    //     user.uid, //wenn array leer, dann wird's noch richtig geadded, aber es rendert/aktualisiert nicht die Liste
+    //     bloodPressureCollectionRef
+    // ]);
+
+    // const getBloodPressure = async () => {
+
+    //     const querySnapshotResponse = await getDocs(q);
+    //     // setBloodPressure(querySnapshotResponse.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    //     // );
+    //     // console.log("1 - setBloodPressure");
+    //     querySnapshotResponse.forEach((doc) => {
+    //         // doc.data() is never undefined for query doc snapshots
+    //         console.log(doc.id, " => ", ({ ...doc.data(), id: doc.id }));
+    //     });
+    // };
 
     useEffect(() => {
-        getBloodPressure();
-        console.log("2 - getBloodPressure"); //infinite loop!
-    }, [
-        user.uid, //wenn array leer, dann wird's noch richtig geadded, aber es rendert/aktualisiert nicht die Liste
-        // bloodPressureCollectionRef
-    ]);
+        const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
+
+        const handleSnapshot = (snapshot) => {
+            setBloodPressure(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+        };
+        getDocs(q).then(handleSnapshot);
+
+        return onSnapshot(q, bloodPressureCollectionRef, handleSnapshot)
+    }, [user.uid]);
 
 
 

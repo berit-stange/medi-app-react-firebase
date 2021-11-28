@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from './Navigation';
 // import MainPage from './MainPage';
 // import DayView from './DayView';
-// import MedicationList from './MedicationList';
-import { MedicationListClassComponent } from './MedicationListClassComponent';
+import MedicationList from './MedicationList';
+// import { MedicationListClassComponent } from './MedicationListClassComponent';
 import BloodPressureContainer from './BloodPressureContainer';
-import { BloodPressureContainerClassComp } from './BloodPressureContainerClassComp';
+// import { BloodPressureContainerClassComp } from './BloodPressureContainerClassComp';
 
 import { auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -31,11 +31,12 @@ function App() {
         </div>
         <Navigation />
         <Routes >
-          <Route exact path="/" element={<MedicationListClassComponent />} />
-          {/* <Route exact path="/medication-list" element={<MedicationList />} /> */}
-          <Route exact path="/medication" element={<MedicationListClassComponent />} />
-          <Route exact path="/blood-pressure" element={<BloodPressureContainerClassComp />} />
-          <Route exact path="/blood-pressure-func" element={<BloodPressureContainer />} />
+          {/* <Route exact path="/" element={<MedicationListClassComponent />} /> */}
+          <Route exact path="/" element={<MedicationList />} />
+          {/* <Route exact path="/medication" element={<MedicationListClassComponent />} /> */}
+          <Route exact path="/medication" element={<MedicationList />} />
+          {/* <Route exact path="/blood-pressure" element={<BloodPressureContainerClassComp />} /> */}
+          <Route exact path="/blood-pressure" element={<BloodPressureContainer />} />
         </Routes>
       </BrowserRouter>
 
