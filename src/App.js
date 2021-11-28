@@ -35,7 +35,7 @@ function App() {
           {/* <Route exact path="/medication-list" element={<MedicationList />} /> */}
           <Route exact path="/medication" element={<MedicationListClassComponent />} />
           <Route exact path="/blood-pressure" element={<BloodPressureContainerClassComp />} />
-          {/* <Route exact path="/blood-pressure-func" element={<BloodPressureContainer />} /> */}
+          <Route exact path="/blood-pressure-func" element={<BloodPressureContainer />} />
         </Routes>
       </BrowserRouter>
 

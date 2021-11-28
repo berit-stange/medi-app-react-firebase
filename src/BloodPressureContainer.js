@@ -15,7 +15,7 @@ import {
     doc,
     // onSnapshot,
     // orderBy,
-    serverTimestamp,
+    // serverTimestamp,
     query,
     where
 } from "firebase/firestore";
@@ -26,9 +26,31 @@ const BloodPressureContainer = () => {
     const [user] = useAuthState(auth);
     const [value1, setBloodPressureValue1] = useState("");
     const [value2, setBloodPressureValue2] = useState("");
-    const [comment, setBloodPressureComment] = useState("banana");
+    const [comment, setBloodPressureComment] = useState("no comment");
     const [bloodPressure, setBloodPressure] = useState([]);
+    // const [bloodPressure, setBloodPressure] = useState({ value1: "", value2: "", comment: "", time: "", timestamp: "" });
     const bloodPressureCollectionRef = collection(db, "bloodPressure");
+
+
+    const addBloodPressure = async () => {
+        const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+        const dateSorting = new Date().toISOString();
+        await addDoc(bloodPressureCollectionRef, {
+            value1: value1,
+            value2: value2,
+            comment: comment,
+            time: date,
+            timestamp: dateSorting,
+            uid: user.uid
+        });
+    };
+
+
+    const deleteBloodPressure = async (id) => {
+        const bloodPressureDoc = doc(db, "bloodPressure", id);
+        await deleteDoc(bloodPressureDoc);
+    };
+
 
     // const getBloodPressure = () => {
     //     const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
@@ -50,51 +72,6 @@ const BloodPressureContainer = () => {
     //     ;
 
 
-    const addBloodPressure = async () => {
-        const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
-        const dateSorting = new Date().toISOString();
-        await addDoc(bloodPressureCollectionRef, {
-            value1: value1,
-            value2: value2,
-            comment: comment,
-            time: date,
-            timestamp: dateSorting,
-            uid: user.uid
-        });
-    };
-
-    // const addBloodPressure = () => {
-    //     // e.preventDefault();
-    //     const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
-    //     addDoc(bloodPressureCollectionRef, {
-    //         value1: value1,
-    //         value2: value2,
-    //         comment: comment,
-    //         time: date,
-    //         timestamp: serverTimestamp(),
-    //         uid: user.uid
-    //     })
-    //     // .then(() => {
-    //     //     const data = value1;
-    //     //     console.log(data);
-    //     //     // getBloodPressure();
-
-    //     //     // window.open('blood-pressure', '_self'); //self: page will open in the current tab
-    //     // })
-    //     // .catch(e => {
-    //     //     console.log('error at addBloodPressure')
-    //     // });
-    // };
-
-    // const reset = () => {
-    //     setBloodPressureValue1();
-    // };
-
-    const deleteBloodPressure = async (id) => {
-        const bloodPressureDoc = doc(db, "bloodPressure", id);
-        await deleteDoc(bloodPressureDoc);
-    };
-
     // useEffect(() => {
     //     const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
     //     const unsub = onSnapshot(q, (snapshot) =>
@@ -108,23 +85,6 @@ const BloodPressureContainer = () => {
     //     user,
     //     bloodPressureCollectionRef
     // ]);
-
-    useEffect(() => {
-        const getBloodPressure = async () => {
-            const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
-            const querySnapshot = await getDocs(q);
-            setBloodPressure(querySnapshot.docs
-                .map((doc) => ({ ...doc.data(), id: doc.id }))
-            );
-        };
-        getBloodPressure()
-            .catch(console.error);
-        console.log("OK"); //loggt ca. 3000 x pro Sekunde
-    }, [
-        user.uid, //wenn array leer, dann wird's noch richtig geadded, aber es aktualisiert nicht die Liste
-        bloodPressureCollectionRef
-    ]);
-
 
 
     // useEffect(() => {
@@ -149,6 +109,23 @@ const BloodPressureContainer = () => {
     //     ]);
     //https://reactjs.org/docs/hooks-effect.html
     //https://www.w3schools.com/react/react_useeffect.asp
+
+    const getBloodPressure = async () => {
+        const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
+        const querySnapshotResponse = await getDocs(q);
+        setBloodPressure(querySnapshotResponse.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+        console.log("1 - setBloodPressure");
+    };
+
+    useEffect(() => {
+        getBloodPressure();
+        console.log("2 - getBloodPressure"); //infinite loop!
+    }, [
+        user.uid, //wenn array leer, dann wird's noch richtig geadded, aber es rendert/aktualisiert nicht die Liste
+        // bloodPressureCollectionRef
+    ]);
+
 
 
     return (
@@ -211,7 +188,8 @@ const BloodPressureContainer = () => {
                                     </div>
                                 </div>
                             );
-                        })}
+                        })
+                    }
                 </div>
             </div>
 

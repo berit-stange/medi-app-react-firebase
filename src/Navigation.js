@@ -28,9 +28,9 @@ function Navigation() {
                     <Link to="/medication">
                         <li>Medis</li>
                     </Link>
-                    {/* <Link to="/blood-pressure-func">
+                    <Link to="/blood-pressure-func">
                         <li>BP-Func</li>
-                    </Link> */}
+                    </Link>
                 </ul>
 
             </div>
