@@ -23,33 +23,26 @@ import {
 const MedicationList = () => {
 
     const [user] = useAuthState(auth);
-    // const [title] = useState("");
-    // const [body] = useState("");
-    const [comment, setComment] = useState("");
+    const [commentAxi, setCommentAxi] = useState("");
+    const [commentNovo, setCommentNovo] = useState("");
+    const [commentPara, setCommentPara] = useState("");
+    const [commentTrama, setCommentTrama] = useState("");
     const [medication, setMedication] = useState([]);
     // const mediCollectionRef = collection(db, "medication");
     const mediCollectionRef = useRef(collection(db, "medication"));
 
-
-    // const createMedi = async () => {
-    //     const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
-    //     await addDoc(mediCollectionRef, {
-    //         title: title,
-    //         body: body,
-    //         time: date
-    //     });
-    // };
 
     const addAxi = async () => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
         await addDoc(mediCollectionRef.current, {
             title: "Axitinib",
-            comment: comment,
+            comment: commentAxi,
             time: dateDisplay,
             timestamp: dateSorting,
             uid: user.uid
         });
+        setCommentAxi("");
     };
 
     const addNovo = async () => {
@@ -57,11 +50,12 @@ const MedicationList = () => {
         const dateSorting = new Date().toISOString();
         await addDoc(mediCollectionRef.current, {
             title: "Novaminsulfon",
-            comment: comment,
+            comment: commentNovo,
             time: dateDisplay,
             timestamp: dateSorting,
             uid: user.uid
         });
+        setCommentNovo("");
     }
 
     const addPara = async () => {
@@ -69,11 +63,12 @@ const MedicationList = () => {
         const dateSorting = new Date().toISOString();
         await addDoc(mediCollectionRef.current, {
             title: "Paracethamol",
-            comment: comment,
+            comment: commentPara,
             time: dateDisplay,
             timestamp: dateSorting,
             uid: user.uid
         });
+        setCommentPara("");
     }
 
     const addTrama = async () => {
@@ -81,11 +76,12 @@ const MedicationList = () => {
         const dateSorting = new Date().toISOString();
         await addDoc(mediCollectionRef.current, {
             title: "Tramadol",
-            comment: comment,
+            comment: commentTrama,
             time: dateDisplay,
             timestamp: dateSorting,
             uid: user.uid
         });
+        setCommentTrama("");
     }
 
     const deleteMedication = async (id) => {
@@ -146,33 +142,15 @@ const MedicationList = () => {
             <div>
                 <div className="blood-pressure-input-box">
                     <div className="blood-pressure-input">
-                        {/* <div className="blood-pressure-values">
-                            <input
-                                placeholder="Medikament..."
-                                onChange={(event) => {
-                                    setNewTitle(event.target.value);
-                                }}
-                            />
-                            <input
-                                // type="number"
-                                placeholder="Dosierung"
-                                onChange={(event) => {
-                                    setNewBody(event.target.value);
-                                }}
-                            />
-                        </div>
-                        <div className="btn-box">
-                            <button className="btn-add-med" onClick={createMedi}>+</button>
-                        </div> */}
-
 
                         <div className="medi-input">
                             <div className="medi-values">
                                 <p className="medi-title">Axi</p>
                                 <input
                                     placeholder="dose / comment"
+                                    value={commentAxi}
                                     onChange={(event) => {
-                                        setComment(event.target.value);
+                                        setCommentAxi(event.target.value);
                                     }}
                                 />
                                 <div className="">
@@ -186,8 +164,9 @@ const MedicationList = () => {
                                 <p className="medi-title">Novo</p>
                                 <input
                                     placeholder="dose / comment"
+                                    value={commentNovo}
                                     onChange={(event) => {
-                                        setComment(event.target.value);
+                                        setCommentNovo(event.target.value);
                                     }}
                                 />
                                 <div className="">
@@ -201,8 +180,9 @@ const MedicationList = () => {
                                 <p className="medi-title">Para</p>
                                 <input
                                     placeholder="dose / comment"
+                                    value={commentPara}
                                     onChange={(event) => {
-                                        setComment(event.target.value);
+                                        setCommentPara(event.target.value);
                                     }}
                                 />
                                 <div className="">
@@ -216,8 +196,9 @@ const MedicationList = () => {
                                 <p className="medi-title">Trama</p>
                                 <input
                                     placeholder="dose / comment"
+                                    value={commentTrama}
                                     onChange={(event) => {
-                                        setComment(event.target.value);
+                                        setCommentTrama(event.target.value);
                                     }}
                                 />
                                 <div className="">
