@@ -156,83 +156,76 @@ const MedicationList = () => {
                 <div className="blood-pressure-input-box">
                     <div className="blood-pressure-input">
 
-                        <div className="medi-input">
-                            <div className="medi-values">
-                                <p className="medi-title">Amlo</p>
-                                <input
-                                    placeholder="dose / comment"
-                                    value={commentAmlo}
-                                    onChange={(event) => {
-                                        setCommentAmlo(event.target.value);
-                                    }}
-                                />
-                                <div className="">
-                                    <button className="btn-add-med" onClick={addAmlo} >+</button>
-                                </div>
+
+                        <div className="medi-values">
+                            <p className="medi-title">Amlodipin</p>
+                            {/* <div className="medi-input"> */}
+                            <input className="medi-input"
+                                placeholder="dose / comment"
+                                value={commentAmlo}
+                                onChange={(event) => {
+                                    setCommentAmlo(event.target.value);
+                                }}
+                            />
+                            {/* </div> */}
+                            <div className="btn-med-box">
+                                <button className="btn-add-med" onClick={addAmlo} >+</button>
                             </div>
                         </div>
 
-                        <div className="medi-input">
-                            <div className="medi-values">
-                                <p className="medi-title">Axi</p>
-                                <input
-                                    placeholder="dose / comment"
-                                    value={commentAxi}
-                                    onChange={(event) => {
-                                        setCommentAxi(event.target.value);
-                                    }}
-                                />
-                                <div className="">
-                                    <button className="btn-add-med" onClick={addAxi} >+</button>
-                                </div>
+                        <div className="medi-values">
+                            <p className="medi-title">Axitinib</p>
+                            <input className="medi-input"
+                                placeholder="dose / comment"
+                                value={commentAxi}
+                                onChange={(event) => {
+                                    setCommentAxi(event.target.value);
+                                }}
+                            />
+                            <div className="btn-med-box">
+                                <button className="btn-add-med" onClick={addAxi} >+</button>
                             </div>
                         </div>
 
-                        <div className="medi-input">
-                            <div className="medi-values">
-                                <p className="medi-title">Novo</p>
-                                <input
-                                    placeholder="dose / comment"
-                                    value={commentNovo}
-                                    onChange={(event) => {
-                                        setCommentNovo(event.target.value);
-                                    }}
-                                />
-                                <div className="">
-                                    <button className="btn-add-med" onClick={addNovo} >+</button>
-                                </div>
+                        <div className="medi-values">
+                            <p className="medi-title">Novalgin</p>
+                            <input className="medi-input"
+                                placeholder="dose / comment"
+                                value={commentNovo}
+                                onChange={(event) => {
+                                    setCommentNovo(event.target.value);
+                                }}
+                            />
+                            <div>
+                                <button className="btn-add-med" onClick={addNovo} >+</button>
                             </div>
                         </div>
 
-                        <div className="medi-input">
-                            <div className="medi-values">
-                                <p className="medi-title">Para</p>
-                                <input
-                                    placeholder="dose / comment"
-                                    value={commentPara}
-                                    onChange={(event) => {
-                                        setCommentPara(event.target.value);
-                                    }}
-                                />
-                                <div className="">
-                                    <button className="btn-add-med" onClick={addPara} >+</button>
-                                </div>
+                        <div className="medi-values">
+                            <p className="medi-title">Paracetamol</p>
+                            <input className="medi-input"
+                                placeholder="dose / comment"
+                                value={commentPara}
+                                onChange={(event) => {
+                                    setCommentPara(event.target.value);
+                                }}
+                            />
+                            <div>
+                                <button className="btn-add-med" onClick={addPara} >+</button>
                             </div>
                         </div>
 
-                        <div className="medi-input">
-                            <div className="medi-values">
-                                <p className="medi-title">Trama</p>
-                                <input
-                                    placeholder="dose / comment"
-                                    value={commentTrama}
-                                    onChange={(event) => {
-                                        setCommentTrama(event.target.value);
-                                    }}
-                                />
-                                <div className="">
-                                    <button className="btn-add-med" onClick={addTrama} >+</button>
-                                </div>
+                        <div className="medi-values">
+                            <p className="medi-title">Tramadol</p>
+                            <input className="medi-input"
+                                placeholder="dose / comment"
+                                value={commentTrama}
+                                onChange={(event) => {
+                                    setCommentTrama(event.target.value);
+                                }}
+                            />
+                            <div>
+                                <button className="btn-add-med" onClick={addTrama} >+</button>
                             </div>
                         </div>
 
