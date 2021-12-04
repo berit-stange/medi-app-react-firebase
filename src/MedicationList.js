@@ -23,6 +23,7 @@ import {
 const MedicationList = () => {
 
     const [user] = useAuthState(auth);
+    const [commentAmlo, setCommentAmlo] = useState("");
     const [commentAxi, setCommentAxi] = useState("");
     const [commentNovo, setCommentNovo] = useState("");
     const [commentPara, setCommentPara] = useState("");
@@ -31,6 +32,18 @@ const MedicationList = () => {
     // const mediCollectionRef = collection(db, "medication");
     const mediCollectionRef = useRef(collection(db, "medication"));
 
+    const addAmlo = async () => {
+        const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+        const dateSorting = new Date().toISOString();
+        await addDoc(mediCollectionRef.current, {
+            title: "Amlodipin",
+            comment: commentAmlo,
+            time: dateDisplay,
+            timestamp: dateSorting,
+            uid: user.uid
+        });
+        setCommentAmlo("");
+    };
 
     const addAxi = async () => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
@@ -142,6 +155,22 @@ const MedicationList = () => {
             <div>
                 <div className="blood-pressure-input-box">
                     <div className="blood-pressure-input">
+
+                        <div className="medi-input">
+                            <div className="medi-values">
+                                <p className="medi-title">Amlo</p>
+                                <input
+                                    placeholder="dose / comment"
+                                    value={commentAmlo}
+                                    onChange={(event) => {
+                                        setCommentAmlo(event.target.value);
+                                    }}
+                                />
+                                <div className="">
+                                    <button className="btn-add-med" onClick={addAmlo} >+</button>
+                                </div>
+                            </div>
+                        </div>
 
                         <div className="medi-input">
                             <div className="medi-values">
