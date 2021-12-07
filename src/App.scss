@@ -39,7 +39,7 @@ h1 {
 }
 
 h2 {
-    font-size: $font-small;
+    font-size: $font-medium;
     font-weight: $font-regular;
     // margin: 0;
     text-align: center;
@@ -213,8 +213,9 @@ button {
     background-color: $dark-color;
     color: $accent-color;
     font-weight: $font-heavy;
-    height: 3.5em;
-    width: 3.5em;
+    font-size: $font-medium;
+    height: 2.5em;
+    width: 2.5em;
     margin: 0 0 0 1rem;
 }
 
@@ -227,6 +228,17 @@ button {
     width: 3.5em;
     // margin: 0.2rem 0 0rem 0.2rem;
     // flex-grow: 1;
+}
+
+.btn-add-dose {
+    background-color: $dark-color;
+    color: $accent-color;
+    font-size: $font-medium;
+    font-weight: $font-heavy;
+    height: 2.5em;
+    width: 2.5em;
+    margin: 0 0 0rem 1rem;
+    flex-grow: 1;
 }
 
 .btn-med-box {

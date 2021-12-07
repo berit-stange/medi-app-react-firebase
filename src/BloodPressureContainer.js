@@ -71,7 +71,7 @@ const BloodPressureContainer = () => {
         <div>
 
             <div>
-                <h2>Add Blood Pressure</h2>
+                <h2>Blutdruck hinzufügen</h2>
                 <div className="blood-pressure-input-box">
                     <div className="blood-pressure-input">
                         <div className="blood-pressure-values">
@@ -106,7 +106,7 @@ const BloodPressureContainer = () => {
                 </div>
 
                 <div>
-                    <h2>Blutdruck Aufzeichnung</h2>
+                    <h2>Aufzeichnung</h2>
                     {bloodPressure
                         .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
                         .map((bloodPressure) => {
