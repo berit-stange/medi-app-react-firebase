@@ -17,6 +17,7 @@ $font-tiny: 0.7rem;
 $font-heavy: 600;
 $font-regular: 400;
 $font-light: 300;
+$number-medium: 1rem;
 
 * {
     box-sizing: border-box;
@@ -41,7 +42,7 @@ h1 {
 h2 {
     font-size: $font-medium;
     font-weight: $font-regular;
-    // margin: 0;
+    margin: 0 0 0.5em 0;
     text-align: center;
 }
 
@@ -136,18 +137,15 @@ input {
 }
 
 .blood-pressure-title {
-    // font-size: $font-small;
-    // font-weight: $font-regular;
     margin: 0.8em 0 0 0;
-    // text-align: center;
 }
 
 .blood-pressure-input-box {
     // background-color: $dark-color;
     border-radius: 0.5em;
     // color: $accent-color;
-    padding: 1em;
-    margin: 0 0 0.8em 0 0 0 0;
+    padding: 0.5em 1em 1em 0.5em;
+    margin: 0;
     display: flex;
     // flex-wrap: wrap;
     flex-direction: column;
@@ -159,6 +157,7 @@ input {
     // flex-wrap: wrap;
     flex-direction: column;
     align-items: stretch;
+    padding: 0.5em 0 1em 0;
 }
 
 .blood-pressure-values {
@@ -174,6 +173,10 @@ input {
     flex-direction: row;
     justify-content: space-between;
     margin: 0;
+}
+
+.blood-pressure-list {
+    padding: 1em 0 1em 0;
 }
 
 .blood-pressure-list-item {
@@ -233,11 +236,11 @@ button {
 .btn-add-dose {
     background-color: $dark-color;
     color: $accent-color;
-    font-size: $font-medium;
+    font-size: $number-medium;
     font-weight: $font-heavy;
-    height: 2.5em;
-    width: 2.5em;
-    margin: 0 0 0rem 1rem;
+    height: 3em;
+    width: 3em;
+    margin: 0 0 0 0.5em;
     flex-grow: 1;
 }
 
@@ -249,6 +252,10 @@ button {
 .btn-box {
     // align-self: flex-end;
     align-self: baseline;
+}
+
+.medi-list {
+    padding: 2em 0 1em 0;
 }
 
 .medi-list-item {
@@ -308,9 +315,4 @@ button {
     width: 10em;
     margin: 1em;
     background-color: $accent-color;
-}
-
-.changeColor {
-    background-color: $dark-color;
-    color: $accent-color;
 }

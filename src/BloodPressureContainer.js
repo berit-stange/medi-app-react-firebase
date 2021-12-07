@@ -68,67 +68,63 @@ const BloodPressureContainer = () => {
 
 
     return (
-        <div>
-
-            <div>
-                <h2>Blutdruck hinzufügen</h2>
-                <div className="blood-pressure-input-box">
-                    <div className="blood-pressure-input">
-                        <div className="blood-pressure-values">
-                            <input
-                                placeholder="value 1"
-                                value={value1}
-                                onChange={(event) => {
-                                    setBloodPressureValue1(event.target.value);
-                                }}
-                            />
-                            <input
-                                placeholder="value 2"
-                                value={value2}
-                                onChange={(event) => {
-                                    setBloodPressureValue2(event.target.value);
-                                }}
-                            />
-                        </div>
-                        <div className="blood-pressure-comment">
-                            <input
-                                placeholder="comment"
-                                value={comment}
-                                onChange={(event) => {
-                                    setBloodPressureComment(event.target.value);
-                                }}
-                            />
-                            <div className="btn-bp">
-                                <button className="btn-add-bp" onClick={addBloodPressure} >+</button>
-                            </div>
-                        </div>
+        <div className="blood-pressure-input-box">
+            <h2>Blutdruck hinzufügen</h2>
+            <div className="blood-pressure-input">
+                <div className="blood-pressure-values">
+                    <input
+                        placeholder="value 1"
+                        value={value1}
+                        onChange={(event) => {
+                            setBloodPressureValue1(event.target.value);
+                        }}
+                    />
+                    <input
+                        placeholder="value 2"
+                        value={value2}
+                        onChange={(event) => {
+                            setBloodPressureValue2(event.target.value);
+                        }}
+                    />
+                </div>
+                <div className="blood-pressure-comment">
+                    <input
+                        placeholder="comment"
+                        value={comment}
+                        onChange={(event) => {
+                            setBloodPressureComment(event.target.value);
+                        }}
+                    />
+                    <div className="btn-bp">
+                        <button className="btn-add-bp" onClick={addBloodPressure} >+</button>
                     </div>
                 </div>
+            </div>
 
-                <div>
-                    <h2>Aufzeichnung</h2>
-                    {bloodPressure
-                        .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
-                        .map((bloodPressure) => {
-                            return (
-                                <div className="blood-pressure-list-item" key={bloodPressure.id}>
-                                    <div>
-                                        <p>{bloodPressure.time.toString()}</p>
-                                        <p>{bloodPressure.value1} / {bloodPressure.value2}</p>
-                                        <p>{bloodPressure.comment}</p>
-                                    </div>
-                                    <div className="btn-box">
-                                        <button className="" onClick={() => { deleteBloodPressure(bloodPressure.id); }} >
-                                            <span className="material-icons-round">
-                                                delete
-                                            </span>
-                                        </button>
-                                    </div>
+
+            <div className="blood-pressure-list">
+                <h2>Aufzeichnung</h2>
+                {bloodPressure
+                    .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
+                    .map((bloodPressure) => {
+                        return (
+                            <div className="blood-pressure-list-item" key={bloodPressure.id}>
+                                <div>
+                                    <p>{bloodPressure.time.toString()}</p>
+                                    <p>{bloodPressure.value1} / {bloodPressure.value2}</p>
+                                    <p>{bloodPressure.comment}</p>
                                 </div>
-                            );
-                        })
-                    }
-                </div>
+                                <div className="btn-box">
+                                    <button className="" onClick={() => { deleteBloodPressure(bloodPressure.id); }} >
+                                        <span className="material-icons-round">
+                                            delete
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        );
+                    })
+                }
             </div>
 
         </div>

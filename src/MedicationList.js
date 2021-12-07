@@ -164,96 +164,98 @@ const MedicationList = () => {
 
     return (
 
-        <div>
-            <div>
-                <div className="blood-pressure-input-box">
-                    <div className="blood-pressure-input">
-                        <h2>Medikamente</h2>
+        <div className="blood-pressure-input-box">
+            <div className="blood-pressure-input">
+                <h2>Medikamente</h2>
 
-                        <div className="medi-values">
-                            <p className="medi-title">Amlodipin</p>
-                            <div className="btn-med-box">
-                                <button className="btn-add-dose" onClick={addAmlo1} >1</button>
-                            </div>
-                        </div>
-
-                        <div className="medi-values">
-                            <p className="medi-title">Axitinib</p>
-                            <div className="btn-med-box">
-                                <button className="btn-add-dose" onClick={addAxi1} >1</button>
-                            </div>
-                        </div>
-
-                        <div className="medi-values">
-                            <p className="medi-title">MST</p>
-                            <div>
-                                <button className="btn-add-dose" onClick={addMST1} >1</button>
-                            </div>
-                        </div>
-
-                        <div className="medi-values">
-                            <p className="medi-title">Novalgin</p>
-                            <div>
-                                <button className="btn-add-dose" onClick={addNovo1} >1</button>
-                            </div>
-                            <div>
-                                <button className="btn-add-dose" onClick={addNovo2} >2</button>
-                            </div>
-                        </div>
-
-                        <div className="medi-values">
-                            <p className="medi-title">Paracetamol</p>
-                            <div>
-                                <button className="btn-add-dose" onClick={addPara1} >1</button>
-                            </div>
-                            <div>
-                                <button className="btn-add-dose" onClick={addPara2} >2</button>
-                            </div>
-                        </div>
-
-                        <div className="medi-values">
-                            <p className="medi-title">Sevredol</p>
-                            <div>
-                                <button className="btn-add-dose" onClick={addSevredol1} >1</button>
-                            </div>
-                        </div>
-
-                        <div className="medi-values">
-                            <p className="medi-title">Tramadol</p>
-                            <div>
-                                <button className="btn-add-dose" onClick={addTrama1} >1</button>
-                            </div>
-                            <div>
-                                <button className="btn-add-dose" onClick={addTrama2} >2</button>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div>
-                        <h2>Aufzeichnung</h2>
-                        {medication
-                            .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
-                            .map((medication) => {
-                                return (
-                                    <div className="medi-list-item" key={medication.id}>
-                                        <div>
-                                            <p>{medication.time.toString()}</p>
-                                            <p>{medication.title} - {medication.comment}</p>
-                                        </div>
-                                        <div className="btn-box btn-med-delete">
-                                            <button onClick={() => { deleteMedication(medication.id); }} >
-                                                <span className="material-icons-round">
-                                                    delete
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                );
-                            })}
+                <div className="medi-values">
+                    <p className="medi-title">Amlodipin</p>
+                    <div className="btn-med-box">
+                        <button className="btn-add-dose" onClick={addAmlo1} >1</button>
                     </div>
                 </div>
+
+                <div className="medi-values">
+                    <p className="medi-title">Axitinib</p>
+                    <div className="btn-med-box">
+                        <button className="btn-add-dose" onClick={addAxi1} >1</button>
+                    </div>
+                </div>
+
+                <div className="medi-values">
+                    <p className="medi-title">MST</p>
+                    <div>
+                        <button className="btn-add-dose" onClick={addMST1} >1</button>
+                    </div>
+                </div>
+
+                <div className="medi-values">
+                    <p className="medi-title">Novalgin</p>
+                    <div>
+                        <button className="btn-add-dose" /* onClick={addNovo1} */ >0.5</button>
+                    </div>
+                    <div>
+                        <button className="btn-add-dose" onClick={addNovo1} >1</button>
+                    </div>
+                    <div>
+                        <button className="btn-add-dose" onClick={addNovo2} >2</button>
+                    </div>
+                </div>
+
+                <div className="medi-values">
+                    <p className="medi-title">Paracetamol</p>
+                    <div>
+                        <button className="btn-add-dose" /* onClick={addPara1} */ >0.5</button>
+                    </div>
+                    <div>
+                        <button className="btn-add-dose" onClick={addPara1} >1</button>
+                    </div>
+                    <div>
+                        <button className="btn-add-dose" onClick={addPara2} >2</button>
+                    </div>
+                </div>
+
+                <div className="medi-values">
+                    <p className="medi-title">Sevredol</p>
+                    <div>
+                        <button className="btn-add-dose" onClick={addSevredol1} >1</button>
+                    </div>
+                </div>
+
+                <div className="medi-values">
+                    <p className="medi-title">Tramadol</p>
+                    <div>
+                        <button className="btn-add-dose" onClick={addTrama1} >1</button>
+                    </div>
+                    <div>
+                        <button className="btn-add-dose" onClick={addTrama2} >2</button>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div className="medi-list">
+                <h2>Aufzeichnung</h2>
+                {medication
+                    .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
+                    .map((medication) => {
+                        return (
+                            <div className="medi-list-item" key={medication.id}>
+                                <div>
+                                    <p>{medication.time.toString()}</p>
+                                    <p>{medication.title} - {medication.comment}</p>
+                                </div>
+                                <div className="btn-box btn-med-delete">
+                                    <button onClick={() => { deleteMedication(medication.id); }} >
+                                        <span className="material-icons-round">
+                                            delete
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        );
+                    })}
             </div>
         </div>
 

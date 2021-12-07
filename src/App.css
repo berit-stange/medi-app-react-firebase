@@ -24,6 +24,7 @@ h1 {
 h2 {
   font-size: 1.3rem;
   font-weight: 400;
+  margin: 0 0 0.5em 0;
   text-align: center;
 }
 
@@ -129,8 +130,8 @@ input {
 
 .blood-pressure-input-box {
   border-radius: 0.5em;
-  padding: 1em;
-  margin: 0 0 0.8em 0 0 0 0;
+  padding: 0.5em 1em 1em 0.5em;
+  margin: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -151,6 +152,7 @@ input {
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
+  padding: 0.5em 0 1em 0;
 }
 
 .blood-pressure-values {
@@ -182,6 +184,10 @@ input {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin: 0;
+}
+
+.blood-pressure-list {
+  padding: 1em 0 1em 0;
 }
 
 .blood-pressure-list-item {
@@ -244,11 +250,11 @@ button {
 .btn-add-dose {
   background-color: #27336b;
   color: #80ecda;
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: 600;
-  height: 2.5em;
-  width: 2.5em;
-  margin: 0 0 0rem 1rem;
+  height: 3em;
+  width: 3em;
+  margin: 0 0 0 0.5em;
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
@@ -263,6 +269,10 @@ button {
 .btn-box {
   -ms-flex-item-align: baseline;
       align-self: baseline;
+}
+
+.medi-list {
+  padding: 2em 0 1em 0;
 }
 
 .medi-list-item {
@@ -334,10 +344,5 @@ button {
   width: 10em;
   margin: 1em;
   background-color: #80ecda;
-}
-
-.changeColor {
-  background-color: #27336b;
-  color: #80ecda;
 }
 /*# sourceMappingURL=App.css.map */
