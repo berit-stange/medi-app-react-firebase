@@ -37,18 +37,6 @@ const MedicationList = () => {
         });
     };
 
-    const addAmlo2 = async () => {
-        const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
-        const dateSorting = new Date().toISOString();
-        await addDoc(mediCollectionRef.current, {
-            title: "Amlodipin",
-            comment: "2",
-            time: dateDisplay,
-            timestamp: dateSorting,
-            uid: user.uid
-        });
-    };
-
     const addAxi1 = async () => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
@@ -133,6 +121,30 @@ const MedicationList = () => {
         });
     }
 
+    const addMST1 = async () => {
+        const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+        const dateSorting = new Date().toISOString();
+        await addDoc(mediCollectionRef.current, {
+            title: "MST",
+            comment: "1",
+            time: dateDisplay,
+            timestamp: dateSorting,
+            uid: user.uid
+        });
+    }
+
+    const addSevredol1 = async () => {
+        const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+        const dateSorting = new Date().toISOString();
+        await addDoc(mediCollectionRef.current, {
+            title: "Sevredol",
+            comment: "1",
+            time: dateDisplay,
+            timestamp: dateSorting,
+            uid: user.uid
+        });
+    }
+
     const deleteMedication = async (id) => {
         const medicationDoc = doc(db, "medication", id);
         await deleteDoc(medicationDoc);
@@ -156,15 +168,12 @@ const MedicationList = () => {
             <div>
                 <div className="blood-pressure-input-box">
                     <div className="blood-pressure-input">
-
+                        <h2>Medikamente</h2>
 
                         <div className="medi-values">
                             <p className="medi-title">Amlodipin</p>
                             <div className="btn-med-box">
                                 <button className="btn-add-dose" onClick={addAmlo1} >1</button>
-                            </div>
-                            <div className="btn-med-box">
-                                <button className="btn-add-dose" onClick={addAmlo2} >2</button>
                             </div>
                         </div>
 
@@ -172,6 +181,13 @@ const MedicationList = () => {
                             <p className="medi-title">Axitinib</p>
                             <div className="btn-med-box">
                                 <button className="btn-add-dose" onClick={addAxi1} >1</button>
+                            </div>
+                        </div>
+
+                        <div className="medi-values">
+                            <p className="medi-title">MST</p>
+                            <div>
+                                <button className="btn-add-dose" onClick={addMST1} >1</button>
                             </div>
                         </div>
 
@@ -196,6 +212,13 @@ const MedicationList = () => {
                         </div>
 
                         <div className="medi-values">
+                            <p className="medi-title">Sevredol</p>
+                            <div>
+                                <button className="btn-add-dose" onClick={addSevredol1} >1</button>
+                            </div>
+                        </div>
+
+                        <div className="medi-values">
                             <p className="medi-title">Tramadol</p>
                             <div>
                                 <button className="btn-add-dose" onClick={addTrama1} >1</button>
@@ -209,7 +232,7 @@ const MedicationList = () => {
 
 
                     <div>
-                        <h2>Medi List</h2>
+                        <h2>Aufzeichnung</h2>
                         {medication
                             .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
                             .map((medication) => {
