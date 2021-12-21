@@ -133,7 +133,7 @@ const MedicationList = () => {
         });
     }
 
-    const addMST05 = async () => {
+    const addMorphin05 = async () => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
         await addDoc(mediCollectionRef.current, {
@@ -145,11 +145,11 @@ const MedicationList = () => {
         });
     }
 
-    const addMST1 = async () => {
+    const addMorphin1 = async () => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
         await addDoc(mediCollectionRef.current, {
-            title: "MST",
+            title: "Morphin",
             comment: "1",
             time: dateDisplay,
             timestamp: dateSorting,
@@ -157,11 +157,11 @@ const MedicationList = () => {
         });
     }
 
-    const addMST2 = async () => {
+    const addMorphin2 = async () => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
         await addDoc(mediCollectionRef.current, {
-            title: "MST",
+            title: "Morphin",
             comment: "2",
             time: dateDisplay,
             timestamp: dateSorting,
@@ -284,15 +284,15 @@ const MedicationList = () => {
                 </div> */}
 
                 <div className="medi-values">
-                    <p className="medi-title">MST</p>
+                    <p className="medi-title">Morphin</p>
                     <div>
-                        <button className="btn-add-dose" onClick={addMST05} >0.5</button>
+                        <button className="btn-add-dose" onClick={addMorphin05} >0.5</button>
                     </div>
                     <div>
-                        <button className="btn-add-dose" onClick={addMST1} >1</button>
+                        <button className="btn-add-dose" onClick={addMorphin1} >1</button>
                     </div>
                     <div>
-                        <button className="btn-add-dose" onClick={addMST2} >2</button>
+                        <button className="btn-add-dose" onClick={addMorphin2} >2</button>
                     </div>
                 </div>
 
