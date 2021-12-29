@@ -28,9 +28,9 @@ function Navigation() {
                     <Link to="/medication">
                         <li>Medis</li>
                     </Link>
-                    {/* <Link to="/blood-pressure-func">
-                        <li>BP-Func</li>
-                    </Link> */}
+                    <Link to="/settings">
+                        <span className="material-icons-round">settings</span>
+                    </Link>
                 </ul>
 
             </div>
