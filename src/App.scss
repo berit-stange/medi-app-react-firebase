@@ -133,7 +133,10 @@ input {
     margin: 0.5rem;
     padding: 0.4rem;
     flex-grow: 1;
-    // width: 70px;
+
+    &:focus-visible {
+        outline: none;
+    }
 }
 
 .blood-pressure-title {
@@ -315,4 +318,8 @@ button {
     width: 10em;
     margin: 1em;
     background-color: $accent-color;
+}
+
+.search-box {
+    display: flex;
 }

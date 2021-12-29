@@ -23,43 +23,8 @@ const MedicationList = () => {
     const [user] = useAuthState(auth);
     const [medication, setMedication] = useState([]);
     const mediCollectionRef = useRef(collection(db, "medication"));
+    const [searchTerm, setSearchTerm] = useState("");
 
-
-    // const addAmlo05 = async () => {
-    //     const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
-    //     const dateSorting = new Date().toISOString();
-    //     await addDoc(mediCollectionRef.current, {
-    //         title: "Amlodipin",
-    //         comment: "0.5",
-    //         time: dateDisplay,
-    //         timestamp: dateSorting,
-    //         uid: user.uid
-    //     });
-    // };
-
-    // const addAmlo1 = async () => {
-    //     const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
-    //     const dateSorting = new Date().toISOString();
-    //     await addDoc(mediCollectionRef.current, {
-    //         title: "Amlodipin",
-    //         comment: "1",
-    //         time: dateDisplay,
-    //         timestamp: dateSorting,
-    //         uid: user.uid
-    //     });
-    // };
-
-    // const addAxi1 = async () => {
-    //     const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
-    //     const dateSorting = new Date().toISOString();
-    //     await addDoc(mediCollectionRef.current, {
-    //         title: "Axitinib",
-    //         comment: "1",
-    //         time: dateDisplay,
-    //         timestamp: dateSorting,
-    //         uid: user.uid
-    //     });
-    // };
 
     const addNovo05 = async () => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
@@ -242,23 +207,6 @@ const MedicationList = () => {
             <div className="blood-pressure-input">
                 <h2>Medikamente</h2>
 
-                {/* <div className="medi-values">
-                    <p className="medi-title">Amlodipin</p>
-                    <div className="btn-med-box">
-                        <button className="btn-add-dose" onClick={addAmlo05} >0.5</button>
-                    </div>
-                    <div className="btn-med-box">
-                        <button className="btn-add-dose" onClick={addAmlo1} >1</button>
-                    </div>
-                </div> */}
-
-                {/* <div className="medi-values">
-                    <p className="medi-title">Axitinib</p>
-                    <div className="btn-med-box">
-                        <button className="btn-add-dose" onClick={addAxi1} >1</button>
-                    </div>
-                </div> */}
-
                 <div className="medi-values">
                     <p className="medi-title">Morphin</p>
                     <div>
@@ -329,22 +277,31 @@ const MedicationList = () => {
                         <button className="btn-add-dose" onClick={addCalcium1} >1</button>
                     </div>
                 </div>
-
-
             </div>
 
 
             <div className="medi-list">
                 <h2>Aufzeichnung</h2>
+
+                <div className="search-box">
+                    <input
+                        type="search-input"
+                        placeholder="Suche"
+                        onChange={(event) => { setSearchTerm(event.target.value); }}
+                        aria-label="Suche" />
+                </div>
+
+
                 {medication
                     .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
-                    // .sort((a, b) => a.title < b.title ? -1 : 1)
+                    .filter((val) => { return (val.title.toLowerCase().includes(searchTerm.toLowerCase())) })
                     .map((medication) => {
                         return (
                             <div className="medi-list-item" key={medication.id}>
                                 <div>
                                     <p>{medication.time.toString()} - {medication.title} - {medication.comment}</p>
                                 </div>
+
                                 <div className="btn-box btn-med-delete">
                                     <button onClick={() => { deleteMedication(medication.id); }} >
                                         <span className="material-icons-round">
@@ -354,7 +311,8 @@ const MedicationList = () => {
                                 </div>
                             </div>
                         );
-                    })}
+                    })
+                }
             </div>
         </div>
 
