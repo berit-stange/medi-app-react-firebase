@@ -3,12 +3,11 @@ import { useState, useEffect, useRef } from "react";
 import { auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-// import { auth } from './firebase';
 import { db } from "./firebase-config";
 
 import {
     collection,
-    getDocs, //stattdessen query
+    getDocs,
     addDoc,
     deleteDoc,
     doc,

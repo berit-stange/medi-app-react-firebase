@@ -54,14 +54,11 @@ const BloodPressureContainer = () => {
 
 
     useEffect(() => {
-        // const q = query(bloodPressureCollectionRef, where("uid", "==", user.uid));
         const q = query(bloodPressureCollectionRef.current, where("uid", "==", user.uid));
-
         const handleSnapshot = (snapshot) => {
             setBloodPressure(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
         };
         getDocs(q).then(handleSnapshot);
-
         return onSnapshot(q, bloodPressureCollectionRef.current, handleSnapshot)
     }, [user.uid, bloodPressureCollectionRef]);
 
