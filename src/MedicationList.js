@@ -25,29 +25,29 @@ const MedicationList = () => {
     const mediCollectionRef = useRef(collection(db, "medication"));
 
 
-    const addAmlo05 = async () => {
-        const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
-        const dateSorting = new Date().toISOString();
-        await addDoc(mediCollectionRef.current, {
-            title: "Amlodipin",
-            comment: "0.5",
-            time: dateDisplay,
-            timestamp: dateSorting,
-            uid: user.uid
-        });
-    };
+    // const addAmlo05 = async () => {
+    //     const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+    //     const dateSorting = new Date().toISOString();
+    //     await addDoc(mediCollectionRef.current, {
+    //         title: "Amlodipin",
+    //         comment: "0.5",
+    //         time: dateDisplay,
+    //         timestamp: dateSorting,
+    //         uid: user.uid
+    //     });
+    // };
 
-    const addAmlo1 = async () => {
-        const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
-        const dateSorting = new Date().toISOString();
-        await addDoc(mediCollectionRef.current, {
-            title: "Amlodipin",
-            comment: "1",
-            time: dateDisplay,
-            timestamp: dateSorting,
-            uid: user.uid
-        });
-    };
+    // const addAmlo1 = async () => {
+    //     const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+    //     const dateSorting = new Date().toISOString();
+    //     await addDoc(mediCollectionRef.current, {
+    //         title: "Amlodipin",
+    //         comment: "1",
+    //         time: dateDisplay,
+    //         timestamp: dateSorting,
+    //         uid: user.uid
+    //     });
+    // };
 
     // const addAxi1 = async () => {
     //     const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
@@ -133,36 +133,24 @@ const MedicationList = () => {
         });
     }
 
-    const addMorphin05 = async () => {
+    const addMorphin10 = async () => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
         await addDoc(mediCollectionRef.current, {
-            title: "MST",
-            comment: "0.5",
+            title: "Morphin",
+            comment: "10 mg",
             time: dateDisplay,
             timestamp: dateSorting,
             uid: user.uid
         });
     }
 
-    const addMorphin1 = async () => {
+    const addMorphin30 = async () => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
         await addDoc(mediCollectionRef.current, {
             title: "Morphin",
-            comment: "1",
-            time: dateDisplay,
-            timestamp: dateSorting,
-            uid: user.uid
-        });
-    }
-
-    const addMorphin2 = async () => {
-        const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
-        const dateSorting = new Date().toISOString();
-        await addDoc(mediCollectionRef.current, {
-            title: "Morphin",
-            comment: "2",
+            comment: "30 mg",
             time: dateDisplay,
             timestamp: dateSorting,
             uid: user.uid
@@ -186,18 +174,6 @@ const MedicationList = () => {
         const dateSorting = new Date().toISOString();
         await addDoc(mediCollectionRef.current, {
             title: "Zofran",
-            comment: "1",
-            time: dateDisplay,
-            timestamp: dateSorting,
-            uid: user.uid
-        });
-    }
-
-    const addManna1 = async () => {
-        const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
-        const dateSorting = new Date().toISOString();
-        await addDoc(mediCollectionRef.current, {
-            title: "Manna 30-60 ml",
             comment: "1",
             time: dateDisplay,
             timestamp: dateSorting,
@@ -266,7 +242,7 @@ const MedicationList = () => {
             <div className="blood-pressure-input">
                 <h2>Medikamente</h2>
 
-                <div className="medi-values">
+                {/* <div className="medi-values">
                     <p className="medi-title">Amlodipin</p>
                     <div className="btn-med-box">
                         <button className="btn-add-dose" onClick={addAmlo05} >0.5</button>
@@ -274,7 +250,7 @@ const MedicationList = () => {
                     <div className="btn-med-box">
                         <button className="btn-add-dose" onClick={addAmlo1} >1</button>
                     </div>
-                </div>
+                </div> */}
 
                 {/* <div className="medi-values">
                     <p className="medi-title">Axitinib</p>
@@ -286,13 +262,10 @@ const MedicationList = () => {
                 <div className="medi-values">
                     <p className="medi-title">Morphin</p>
                     <div>
-                        <button className="btn-add-dose" onClick={addMorphin05} >0.5</button>
+                        <button className="btn-add-dose" onClick={addMorphin10} >10</button>
                     </div>
                     <div>
-                        <button className="btn-add-dose" onClick={addMorphin1} >1</button>
-                    </div>
-                    <div>
-                        <button className="btn-add-dose" onClick={addMorphin2} >2</button>
+                        <button className="btn-add-dose" onClick={addMorphin30} >30</button>
                     </div>
                 </div>
 
@@ -337,13 +310,6 @@ const MedicationList = () => {
                 </div>
 
                 <div className="medi-values">
-                    <p className="medi-title">Manna</p>
-                    <div>
-                        <button className="btn-add-dose" onClick={addManna1} >1</button>
-                    </div>
-                </div>
-
-                <div className="medi-values">
                     <p className="medi-title">Movicol</p>
                     <div>
                         <button className="btn-add-dose" onClick={addMovicol1} >1</button>
@@ -372,6 +338,7 @@ const MedicationList = () => {
                 <h2>Aufzeichnung</h2>
                 {medication
                     .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
+                    // .sort((a, b) => a.title < b.title ? -1 : 1)
                     .map((medication) => {
                         return (
                             <div className="medi-list-item" key={medication.id}>
