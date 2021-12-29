@@ -27,6 +27,9 @@ const UserSettings = () => {
     const [dose, setSettingsDose] = useState("");
     const settingsCollectionRef = useRef(collection(db, "settings"));
 
+    const [medication, setMedication] = useState([]);
+    const mediCollectionRef = useRef(collection(db, "medication"));
+
 
     const addSetting = async (e) => {
         e.preventDefault();
@@ -46,6 +49,18 @@ const UserSettings = () => {
         const settingsDoc = doc(db, "settings", id);
         await deleteDoc(settingsDoc);
     };
+
+    const addMedi = async () => {
+        const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+        const dateSorting = new Date().toISOString();
+        await addDoc(mediCollectionRef.current, {
+            title: settings.id,
+            comment: "1",
+            time: dateDisplay,
+            timestamp: dateSorting,
+            uid: user.uid
+        });
+    }
 
 
     useEffect(() => {
@@ -103,15 +118,23 @@ const UserSettings = () => {
 
 
             <div className="medi-list">
-                <h2>Sammlung</h2>
+                <h2>Elemente</h2>
                 {settings
                     .sort((a, b) => a.title < b.title ? -1 : 1)
                     .map((settings) => {
                         return (
-                            <div className="medi-list-item" key={settings.id}>
+                            <div className="medi-values" key={settings.id}>
+                                <p className="medi-title">{settings.title} - {settings.dose} {settings.unit}</p>
+
                                 <div>
-                                    <p>{settings.title} - {settings.dose} {settings.unit}</p>
+                                    <button
+                                        className="btn-add-dose"
+                                        /* onClick={addCalcium1} */
+                                        onClick={() => { addMedi(settings.id); }}>
+                                        {settings.dose}
+                                    </button>
                                 </div>
+
                                 <div className="btn-box btn-med-delete">
                                     <button>
                                         <span className="material-icons-round">settings</span>
@@ -121,28 +144,10 @@ const UserSettings = () => {
                                             delete
                                         </span>
                                     </button>
-                                </div>
 
-
-                            </div>
-                        );
-                    })
-                }
-            </div>
-
-
-            <div className="medi-list">
-                <h2>Elemente</h2>
-                {settings
-                    .sort((a, b) => a.title < b.title ? -1 : 1)
-                    .map((settings) => {
-                        return (
-                            <div className="medi-values">
-                                <p className="medi-title">{settings.title} - {settings.dose} {settings.unit}</p>
-                                <div>
-                                    <button className="btn-add-dose" /* onClick={addCalcium1} */ >{settings.dose}</button>
                                 </div>
                             </div>
+
                         );
                     })
                 }
