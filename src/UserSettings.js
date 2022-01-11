@@ -21,17 +21,17 @@ const UserSettings = () => {
 
     const [user] = useAuthState(auth);
 
-    const [settings, setSettings] = useState([]);
-    const [title, setSettingsTitle] = useState("");
-    const [unit, setSettingsUnit] = useState("");
-    const [dose, setSettingsDose] = useState("");
+    const [settings, setElements] = useState([]);
+    const [title, setElementTitle] = useState("");
+    const [unit, setElementUnit] = useState("");
+    const [dose, setElementDose] = useState("");
     const settingsCollectionRef = useRef(collection(db, "settings"));
 
     const [medication, setMedication] = useState([]);
     const mediCollectionRef = useRef(collection(db, "medication"));
 
 
-    const addSetting = async (e) => {
+    const addElement = async (e) => {
         e.preventDefault();
         await addDoc(settingsCollectionRef.current, {
             unit: unit,
@@ -39,9 +39,9 @@ const UserSettings = () => {
             title: title,
             uid: user.uid
         });
-        setSettingsTitle("");
-        setSettingsUnit("");
-        setSettingsDose("");
+        setElementTitle("");
+        setElementUnit("");
+        setElementDose("");
     };
 
 
@@ -50,12 +50,13 @@ const UserSettings = () => {
         await deleteDoc(settingsDoc);
     };
 
-    const addMedi = async () => {
+    const addMedi = async (id) => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
+
         await addDoc(mediCollectionRef.current, {
-            title: settings.id,
-            comment: "1",
+            title: "title",
+            comment: "dose",
             time: dateDisplay,
             timestamp: dateSorting,
             uid: user.uid
@@ -66,7 +67,7 @@ const UserSettings = () => {
     useEffect(() => {
         const q = query(settingsCollectionRef.current, where("uid", "==", user.uid));
         const handleSnapshot = (snapshot) => {
-            setSettings(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+            setElements(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
         };
         getDocs(q).then(handleSnapshot);
         console.log("useEffect ok");
@@ -79,8 +80,6 @@ const UserSettings = () => {
 
         <div className="blood-pressure-input-box">
 
-
-
             <div className="blood-pressure-input">
                 <h2>Einstellungen</h2>
                 <div className="blood-pressure-comment">
@@ -88,11 +87,11 @@ const UserSettings = () => {
                         placeholder="title"
                         value={title}
                         onChange={(event) => {
-                            setSettingsTitle(event.target.value);
+                            setElementTitle(event.target.value);
                         }}
                     />
                     <div className="btn-bp">
-                        <button className="btn-add-bp" onClick={addSetting} >+</button>
+                        <button className="btn-add-bp" onClick={addElement} >+</button>
                     </div>
                 </div>
 
@@ -101,14 +100,14 @@ const UserSettings = () => {
                         placeholder="dose"
                         value={dose}
                         onChange={(event) => {
-                            setSettingsDose(event.target.value);
+                            setElementDose(event.target.value);
                         }}
                     />
                     <input
                         placeholder="unit"
                         value={unit}
                         onChange={(event) => {
-                            setSettingsUnit(event.target.value);
+                            setElementUnit(event.target.value);
                         }}
                     />
                 </div>
