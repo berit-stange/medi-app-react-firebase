@@ -30,7 +30,6 @@ const UserSettings = () => {
     const [medication, setMedication] = useState([]);
     const mediCollectionRef = useRef(collection(db, "medication"));
 
-
     const addElement = async (e) => {
         e.preventDefault();
         await addDoc(settingsCollectionRef.current, {
@@ -44,25 +43,32 @@ const UserSettings = () => {
         setElementDose("");
     };
 
-
     const deleteSettings = async (id) => {
         const settingsDoc = doc(db, "settings", id);
         await deleteDoc(settingsDoc);
     };
 
-    const addMedi = async (id) => {
+    const addMedi = async (id, title) => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
+        const settingsRef = doc(db, "settings", id);
+        // https://firebase.google.com/docs/firestore/query-data/get-data
 
         await addDoc(mediCollectionRef.current, {
-            title: "title",
+            title: settingsRef.title,
+            // title: "...",
             comment: "dose",
             time: dateDisplay,
             timestamp: dateSorting,
-            uid: user.uid
+            uid: user.uid,
+            typeId: settingsRef.id
         });
     }
 
+    const deleteMedication = async (id) => {
+        const medicationDoc = doc(db, "medication", id);
+        await deleteDoc(medicationDoc);
+    };
 
     useEffect(() => {
         const q = query(settingsCollectionRef.current, where("uid", "==", user.uid));
@@ -74,6 +80,15 @@ const UserSettings = () => {
         return onSnapshot(q, settingsCollectionRef.current, handleSnapshot)
     }, [user.uid, settingsCollectionRef]);
 
+    useEffect(() => {
+        const q = query(mediCollectionRef.current, where("uid", "==", user.uid));
+        const handleSnapshot = (snapshot) => {
+            setMedication(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+        };
+        getDocs(q).then(handleSnapshot);
+        console.log("useEffect ok");
+        return onSnapshot(q, mediCollectionRef.current, handleSnapshot)
+    }, [user.uid, mediCollectionRef]);
 
 
     return (
@@ -81,7 +96,7 @@ const UserSettings = () => {
         <div className="blood-pressure-input-box">
 
             <div className="blood-pressure-input">
-                <h2>Einstellungen</h2>
+                <h2>Add new Element</h2>
                 <div className="blood-pressure-comment">
                     <input
                         placeholder="title"
@@ -123,13 +138,13 @@ const UserSettings = () => {
                     .map((settings) => {
                         return (
                             <div className="medi-values" key={settings.id}>
-                                <p className="medi-title">{settings.title} - {settings.dose} {settings.unit}</p>
+                                <p className="medi-title">{settings.title} - {settings.dose} {settings.unit}- {settings.id}</p>
 
                                 <div>
                                     <button
                                         className="btn-add-dose"
-                                        /* onClick={addCalcium1} */
-                                        onClick={() => { addMedi(settings.id); }}>
+                                        // onClick={() => { addMedi(settings.id); }}>
+                                        onClick={() => { addMedi(settings.id, settings.title); }}>
                                         {settings.dose}
                                     </button>
                                 </div>
@@ -150,6 +165,33 @@ const UserSettings = () => {
                         );
                     })
                 }
+
+
+                <div className="medi-list">
+                    <h2>Aufzeichnung</h2>
+
+                    {medication
+                        .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
+                        // .filter((val) => { return (val.title.toLowerCase().includes(searchTerm.toLowerCase())) })
+                        .map((medication) => {
+                            return (
+                                <div className="medi-list-item" key={medication.id}>
+                                    <div>
+                                        <p>{medication.time.toString()} - title: {medication.title} - typeId: {medication.typeId}</p>
+                                    </div>
+
+                                    <div className="btn-box btn-med-delete">
+                                        <button onClick={() => { deleteMedication(medication.id); }} >
+                                            <span className="material-icons-round">
+                                                delete
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
+                </div>
             </div>
 
 
