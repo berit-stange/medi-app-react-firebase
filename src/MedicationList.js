@@ -75,9 +75,6 @@ const MedicationList = () => {
     return (
 
         <div className="blood-pressure-input-box">
-            <div className="blood-pressure-input">
-
-            </div>
 
             <h2>Einnahme dokumentieren</h2>
             {settings
