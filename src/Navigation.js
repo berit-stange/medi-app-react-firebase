@@ -26,7 +26,7 @@ function Navigation() {
                         <li>Blutdruck</li>
                     </Link>
                     <Link to="/medication">
-                        <li>Medis</li>
+                        <li>Medikamente</li>
                     </Link>
                     <Link to="/settings">
                         <span className="material-icons-round">settings</span>

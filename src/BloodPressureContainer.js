@@ -25,7 +25,6 @@ const BloodPressureContainer = () => {
     const [value2, setBloodPressureValue2] = useState("");
     const [comment, setBloodPressureComment] = useState("");
     const [bloodPressure, setBloodPressure] = useState([]);
-    // const bloodPressureCollectionRef = collection(db, "bloodPressure");
     const bloodPressureCollectionRef = useRef(collection(db, "bloodPressure"));
 
 
@@ -70,14 +69,14 @@ const BloodPressureContainer = () => {
             <div className="blood-pressure-input">
                 <div className="blood-pressure-values">
                     <input
-                        placeholder="value 1"
+                        placeholder="Wert 1"
                         value={value1}
                         onChange={(event) => {
                             setBloodPressureValue1(event.target.value);
                         }}
                     />
                     <input
-                        placeholder="value 2"
+                        placeholder="Wert 2"
                         value={value2}
                         onChange={(event) => {
                             setBloodPressureValue2(event.target.value);
@@ -86,7 +85,7 @@ const BloodPressureContainer = () => {
                 </div>
                 <div className="blood-pressure-comment">
                     <input
-                        placeholder="comment"
+                        placeholder="Kommentar"
                         value={comment}
                         onChange={(event) => {
                             setBloodPressureComment(event.target.value);

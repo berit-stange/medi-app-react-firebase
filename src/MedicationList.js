@@ -79,7 +79,7 @@ const MedicationList = () => {
 
             </div>
 
-            <h2>Medikamente</h2>
+            <h2>Einnahme dokumentieren</h2>
             {settings
                 .sort((a, b) => a.title < b.title ? -1 : 1)
                 .map((settings) => {

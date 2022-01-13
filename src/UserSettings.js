@@ -63,7 +63,7 @@ const UserSettings = () => {
                 <h2>Medikament hinzufügen</h2>
                 <div className="blood-pressure-comment">
                     <input
-                        placeholder="title"
+                        placeholder="Medikament"
                         value={title}
                         onChange={(event) => {
                             setElementTitle(event.target.value);
@@ -76,14 +76,14 @@ const UserSettings = () => {
 
                 <div className="blood-pressure-values">
                     <input
-                        placeholder="dose"
+                        placeholder="Menge"
                         value={dose}
                         onChange={(event) => {
                             setElementDose(event.target.value);
                         }}
                     />
                     <input
-                        placeholder="unit"
+                        placeholder="Einheit"
                         value={unit}
                         onChange={(event) => {
                             setElementUnit(event.target.value);
