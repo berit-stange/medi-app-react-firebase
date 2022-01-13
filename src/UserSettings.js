@@ -131,21 +131,13 @@ const UserSettings = () => {
 
 
             <div className="medi-list">
-                <h2>Medikamente</h2>
+                <h2>Medikamente bearbeiten</h2>
                 {settings
                     .sort((a, b) => a.title < b.title ? -1 : 1)
                     .map((settings) => {
                         return (
                             <div className="medi-values" key={settings.id}>
                                 <p className="medi-title">{settings.title} - {settings.dose} {settings.unit} </p>
-
-                                {/* <div>
-                                    <button
-                                        className="btn-add-dose"
-                                        onClick={() => { addMedi(settings.id, settings); }}>
-                                        {settings.dose}
-                                    </button>
-                                </div> */}
 
                                 <div className="btn-box btn-med-delete">
                                     <button>
