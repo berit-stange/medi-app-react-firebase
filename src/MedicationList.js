@@ -25,9 +25,6 @@ const MedicationList = () => {
     const [searchTerm, setSearchTerm] = useState("");
 
     const [settings, setElements] = useState([]);
-    const [title, setElementTitle] = useState("");
-    const [unit, setElementUnit] = useState("");
-    const [dose, setElementDose] = useState("");
     const settingsCollectionRef = useRef(collection(db, "settings"));
 
 
