@@ -6,11 +6,11 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { db } from "./firebase-config";
 
 import {
-    collection,
-    getDocs,
     addDoc,
+    collection,
     deleteDoc,
     doc,
+    getDocs,
     onSnapshot,
     query,
     where
@@ -48,22 +48,21 @@ const UserSettings = () => {
         await deleteDoc(settingsDoc);
     };
 
-    const addMedi = async (id, title) => {
+    const addMedi = async (id, settings) => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
         const settingsRef = doc(db, "settings", id);
-        // https://firebase.google.com/docs/firestore/query-data/get-data
 
         await addDoc(mediCollectionRef.current, {
-            title: settingsRef.title,
-            // title: "...",
-            comment: "dose",
+            title: settings.title,
+            comment: settings.dose,
+            unit: settings.unit,
             time: dateDisplay,
             timestamp: dateSorting,
             uid: user.uid,
             typeId: settingsRef.id
         });
-    }
+    };
 
     const deleteMedication = async (id) => {
         const medicationDoc = doc(db, "medication", id);
@@ -96,7 +95,7 @@ const UserSettings = () => {
         <div className="blood-pressure-input-box">
 
             <div className="blood-pressure-input">
-                <h2>Add new Element</h2>
+                <h2>Medikament hinzufügen</h2>
                 <div className="blood-pressure-comment">
                     <input
                         placeholder="title"
@@ -132,22 +131,21 @@ const UserSettings = () => {
 
 
             <div className="medi-list">
-                <h2>Elemente</h2>
+                <h2>Medikamente</h2>
                 {settings
                     .sort((a, b) => a.title < b.title ? -1 : 1)
                     .map((settings) => {
                         return (
                             <div className="medi-values" key={settings.id}>
-                                <p className="medi-title">{settings.title} - {settings.dose} {settings.unit}- {settings.id}</p>
+                                <p className="medi-title">{settings.title} - {settings.dose} {settings.unit} </p>
 
-                                <div>
+                                {/* <div>
                                     <button
                                         className="btn-add-dose"
-                                        // onClick={() => { addMedi(settings.id); }}>
-                                        onClick={() => { addMedi(settings.id, settings.title); }}>
+                                        onClick={() => { addMedi(settings.id, settings); }}>
                                         {settings.dose}
                                     </button>
-                                </div>
+                                </div> */}
 
                                 <div className="btn-box btn-med-delete">
                                     <button>
@@ -167,17 +165,18 @@ const UserSettings = () => {
                 }
 
 
-                <div className="medi-list">
+                {/* <div className="medi-list">
                     <h2>Aufzeichnung</h2>
 
                     {medication
                         .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
-                        // .filter((val) => { return (val.title.toLowerCase().includes(searchTerm.toLowerCase())) })
                         .map((medication) => {
                             return (
                                 <div className="medi-list-item" key={medication.id}>
                                     <div>
-                                        <p>{medication.time.toString()} - title: {medication.title} - typeId: {medication.typeId}</p>
+                                        <p>{medication.time.toString()} - {medication.title} - {medication.comment} {medication.unit}
+                                            
+                                        </p>
                                     </div>
 
                                     <div className="btn-box btn-med-delete">
@@ -191,7 +190,7 @@ const UserSettings = () => {
                             );
                         })
                     }
-                </div>
+                </div> */}
             </div>
 
 
