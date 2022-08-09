@@ -2,14 +2,13 @@ import React from 'react';
 import { useState, useEffect, useRef } from "react";
 import { auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import UserSettingsElement from './UserSettingsElement';
 
 import { db } from "./firebase-config";
 
 import {
     addDoc,
     collection,
-    deleteDoc,
-    doc,
     getDocs,
     onSnapshot,
     query,
@@ -40,11 +39,6 @@ const UserSettings = () => {
         setElementDose("");
     };
 
-    const deleteSettings = async (id) => {
-        const settingsDoc = doc(db, "settings", id);
-        await deleteDoc(settingsDoc);
-    };
-
     useEffect(() => {
         const q = query(settingsCollectionRef.current, where("uid", "==", user.uid));
         const handleSnapshot = (snapshot) => {
@@ -60,10 +54,10 @@ const UserSettings = () => {
 
         <div className="blood-pressure-input-box">
             <div className="blood-pressure-input">
-                <h2>Medikament hinzufügen</h2>
+                <h2>Element hinzufügen</h2>
                 <div className="blood-pressure-comment">
                     <input
-                        placeholder="Medikament"
+                        placeholder="Titel"
                         value={title}
                         onChange={(event) => {
                             setElementTitle(event.target.value);
@@ -96,23 +90,14 @@ const UserSettings = () => {
             <div className="medi-list">
                 <h2>Medikamente bearbeiten</h2>
                 {settings
+                    .sort((a, b) => b.dose < a.dose ? 1 : -1)
                     .sort((a, b) => a.title < b.title ? -1 : 1)
                     .map((settings) => {
                         return (
-                            <div className="medi-values" key={settings.id}>
-                                <p className="medi-title">{settings.title} - {settings.dose} {settings.unit} </p>
-
-                                <div className="btn-box btn-med-delete">
-                                    <button>
-                                        <span className="material-icons-round">settings</span>
-                                    </button>
-                                    <button onClick={() => { deleteSettings(settings.id); }} >
-                                        <span className="material-icons-round">
-                                            delete
-                                        </span>
-                                    </button>
-
-                                </div>
+                            <div key={settings.id}  >
+                                <UserSettingsElement
+                                    settings={settings}
+                                />
                             </div>
                         );
                     })
