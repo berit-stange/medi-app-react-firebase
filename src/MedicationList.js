@@ -112,7 +112,7 @@ const MedicationList = () => {
 
 
                 {medication
-                    .sort((a, b) => a.time > b.time ? -1 : 1)
+                    .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
                     .filter((val) => { return (val.title.toLowerCase().includes(searchTerm.toLowerCase())) })
                     .map((medication) => {
                         return (
