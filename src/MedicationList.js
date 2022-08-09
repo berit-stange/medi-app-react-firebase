@@ -2,14 +2,13 @@ import React from 'react';
 import { useState, useEffect, useRef } from "react";
 import { auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import MedicationElement from './MedicationElement';
 
 import { db } from "./firebase-config";
-
 import {
     collection,
     getDocs,
     addDoc,
-    deleteDoc,
     doc,
     onSnapshot,
     query,
@@ -22,10 +21,10 @@ const MedicationList = () => {
     const [user] = useAuthState(auth);
     const [medication, setMedication] = useState([]);
     const mediCollectionRef = useRef(collection(db, "medication"));
-    const [searchTerm, setSearchTerm] = useState("");
 
-    const [settings, setElements] = useState([]);
     const settingsCollectionRef = useRef(collection(db, "settings"));
+    const [searchTerm, setSearchTerm] = useState("");
+    const [settings, setElements] = useState([]);
 
 
     const addMedi = async (id, settings) => {
@@ -35,7 +34,7 @@ const MedicationList = () => {
 
         await addDoc(mediCollectionRef.current, {
             title: settings.title,
-            comment: settings.dose,
+            dose: settings.dose,
             unit: settings.unit,
             time: dateDisplay,
             timestamp: dateSorting,
@@ -45,18 +44,13 @@ const MedicationList = () => {
     };
 
 
-    const deleteMedication = async (id) => {
-        const medicationDoc = doc(db, "medication", id);
-        await deleteDoc(medicationDoc);
-    };
-
     useEffect(() => {
         const q = query(settingsCollectionRef.current, where("uid", "==", user.uid));
         const handleSnapshot = (snapshot) => {
             setElements(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
         };
         getDocs(q).then(handleSnapshot);
-        console.log("useEffect ok");
+        console.log("get Settings ok");
         return onSnapshot(q, settingsCollectionRef.current, handleSnapshot)
     }, [user.uid, settingsCollectionRef]);
 
@@ -66,10 +60,15 @@ const MedicationList = () => {
         const handleSnapshot = (snapshot) => {
             setMedication(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
         };
-        getDocs(q).then(handleSnapshot);
+        getDocs(q)
+            .then(handleSnapshot);
         console.log("useEffect ok");
         return onSnapshot(q, mediCollectionRef.current, handleSnapshot)
-    }, [user.uid, mediCollectionRef]);
+    }, [
+        user.uid,
+        mediCollectionRef
+    ]);
+
 
 
     return (
@@ -78,6 +77,7 @@ const MedicationList = () => {
 
             <h2>Einnahme dokumentieren</h2>
             {settings
+                .sort((a, b) => b.dose < a.dose ? 1 : -1)
                 .sort((a, b) => a.title < b.title ? -1 : 1)
                 .map((settings) => {
                     return (
@@ -88,7 +88,7 @@ const MedicationList = () => {
                                 <button
                                     className="btn-add-dose"
                                     onClick={() => { addMedi(settings.id, settings); }}>
-                                    {settings.dose}
+                                    {settings.dose} {settings.unit}
                                 </button>
                             </div>
                         </div>
@@ -110,30 +110,22 @@ const MedicationList = () => {
                 </div>
 
 
+
                 {medication
-                    .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
+                    .sort((a, b) => a.time > b.time ? -1 : 1)
                     .filter((val) => { return (val.title.toLowerCase().includes(searchTerm.toLowerCase())) })
                     .map((medication) => {
                         return (
-                            <div className="medi-list-item" key={medication.id}>
-                                <div>
-                                    <p>{medication.time.toString()} - {medication.title} - {medication.comment}</p>
-                                </div>
-
-                                <div className="btn-box btn-med-delete">
-                                    <button onClick={() => { deleteMedication(medication.id); }} >
-                                        <span className="material-icons-round">
-                                            delete
-                                        </span>
-                                    </button>
-                                </div>
+                            <div key={medication.id}  >
+                                <MedicationElement
+                                    medi={medication}
+                                />
                             </div>
                         );
                     })
                 }
             </div>
         </div>
-
 
     );
 }
