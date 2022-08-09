@@ -323,3 +323,43 @@ button {
 .search-box {
     display: flex;
 }
+
+.modal {
+    background-color: $dark-color;
+    border-radius: 1em;
+    padding: 2em;
+    width: 90vw;
+    min-height: 300px;
+    height: 55vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; //vertikal - bzw. in der flex-direction
+    position: fixed;
+    top: 15vh;
+    left: 3vw;
+
+    input {
+        height: 20px;
+    }
+
+    button {
+        width: 3em;
+        height: 3em;
+        background-color: $dark-color;
+        float: right;
+        // display: block;
+    }
+
+    .modal-btn-box {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: space-between;
+    }
+
+    .material-icons-round {
+        font-size: 3em;
+        color: $base-color;
+    }
+}
