@@ -42,7 +42,7 @@ const GoogleLogin = () => {
 
     return (
         <div>
-            <center>
+            <center className="login-screen">
                 <h1>Medi App</h1>
 
                 <button className="btn-login"
