@@ -9,51 +9,49 @@ import {
 import BloodPressureModal from './BloodPressureModal';
 
 
-const BloodPressureElement = ({ bloodPressure }) => {
+const SymptomsElement = ({ symptoms }) => {
 
     const [editActive, setEditActive] = useState("false");
     const [intensity, setSymptomIntensity] = useState("");
     const [description, setSymptomDescription] = useState("");
-    const [symptoms, setSymptoms] = useState([]);
+    const [symptom, setSymptom] = useState([]);
     const [time, setBloodPressureTime] = useState("");
 
-    const deleteBloodPressure = async (id) => {
-        const bloodPressureDoc = doc(db, "bloodPressure", id);
-        await deleteDoc(bloodPressureDoc);
+    const deleteSymptom = async (id) => {
+        const symptomsDoc = doc(db, "symptoms", id);
+        await deleteDoc(symptomsDoc);
     };
 
-    const selectBloodPressure = () => {
+    const selectSymptom = () => {
         setEditActive(true);
-        setBloodPressureValue1(bloodPressure.value1);
-        setBloodPressureValue2(bloodPressure.value2);
-        setBloodPressureComment(bloodPressure.comment);
-        setBloodPressureTime(bloodPressure.time);
-        console.log("selectMedi: " + bloodPressure.value1);
+        setSymptomIntensity(symptoms.intensity);
+        setSymptomDescription(symptoms.description);
+        setBloodPressureTime(symptoms.time);
+        console.log("selectSymptom: " + symptoms.description);
     }
 
-    const updateBloodPressure = async (click, id) => {
+    const updateSymptom = async (click, id) => {
         click.preventDefault();
-        const bloodPressureDoc = doc(db, "bloodPressure", id);
-        await updateDoc(bloodPressureDoc, {
+        const symptomsDoc = doc(db, "symptoms", id);
+        await updateDoc(symptomsDoc, {
             time: time,
-            value2: value2,
-            value1: value1,
-            comment: comment
+            intensity: intensity,
+            description: description
         });
         setEditActive(false);
     };
 
 
     return (
-        <div key={bloodPressure.id} className="medi-list-item">
+        <div key={symptoms.id} className="medi-list-item">
             <div>
-                <p>{bloodPressure.time.toString()}</p>
-                <p>{bloodPressure.value1} / {bloodPressure.value2}</p>
-                <p>{bloodPressure.comment}</p>
+                <p>{symptoms.time.toString()}</p>
+                <p>{symptoms.description}</p>
+                <p>{symptoms.intensity} / 10</p>
             </div>
 
             <div className="list-element-btn-box">
-                <button onClick={() => selectBloodPressure()} >
+                <button onClick={() => setSymptom()} >
                     <span className="material-icons-round">settings</span>
                 </button>
             </div>
@@ -61,18 +59,16 @@ const BloodPressureElement = ({ bloodPressure }) => {
             {
                 editActive === true &&
                 <BloodPressureModal
-                    bloodPressure={bloodPressure}
+                    symptom={symptom}
                     setEditActive={setEditActive}
-                    setBloodPressureValue1={setBloodPressureValue1}
-                    value1={value1}
-                    setBloodPressureValue2={setBloodPressureValue2}
-                    value2={value2}
-                    setBloodPressureComment={setBloodPressureComment}
-                    comment={comment}
+                    setSymptomIntensity={setSymptomIntensity}
+                    intensity={intensity}
+                    setSymptomDescription={setSymptomDescription}
+                    description={description}
                     setBloodPressureTime={setBloodPressureTime}
                     time={time}
-                    updateBloodPressure={updateBloodPressure}
-                    deleteBloodPressure={deleteBloodPressure}
+                    updateSymptom={updateSymptom}
+                    deleteSymptom={deleteSymptom}
                 />
             }
 
@@ -81,4 +77,4 @@ const BloodPressureElement = ({ bloodPressure }) => {
 
 }
 
-export default BloodPressureElement; 
+export default SymptomsElement; 
