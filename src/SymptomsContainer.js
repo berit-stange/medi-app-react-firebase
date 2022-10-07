@@ -127,10 +127,8 @@ export class SymptomsContainer extends React.Component {
                                     <div className="blood-pressure-list-item" key={s.id}>
                                         <div>
                                             <p>{s.time.toString()}</p>
-                                            {/* <p>{bp.timestamp}</p> */}
-                                            <p>{s.intensity} / 10</p>
                                             <p>{s.description}</p>
-                                            {/* <p>uid: {bp.uid}</p> */}
+                                            <p>{s.intensity} / 10</p>
                                         </div>
                                         <div className="btn-box">
                                             <button className=""
