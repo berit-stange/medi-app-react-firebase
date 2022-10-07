@@ -14,7 +14,7 @@ const SymptomsElement = ({ symptoms }) => {
     const [editActive, setEditActive] = useState("false");
     const [intensity, setSymptomIntensity] = useState("");
     const [description, setSymptomDescription] = useState("");
-    const [symptom, setSymptom] = useState([]);
+    // const [symptom, setSymptom] = useState([]);
     const [time, setSymptomTime] = useState("");
 
     const deleteSymptom = async (id) => {
@@ -59,7 +59,7 @@ const SymptomsElement = ({ symptoms }) => {
             {
                 editActive === true &&
                 <SymptomsModal
-                    symptom={symptom}
+                    symptoms={symptoms}
                     setEditActive={setEditActive}
                     setSymptomIntensity={setSymptomIntensity}
                     intensity={intensity}
