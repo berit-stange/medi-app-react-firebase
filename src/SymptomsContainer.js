@@ -30,14 +30,12 @@ const SymptomsContainer = () => {
         const dateSorting = new Date().toISOString();
         await addDoc(symptomsCollectionRef.current, {
             intensity: intensity,
-            // value2: value2,
             description: description,
             time: date,
             timestamp: dateSorting,
             uid: user.uid
         });
         setSymptomIntensity("");
-        // setBloodPressureValue2("");
         setSymptomDescription("");
     };
 
@@ -59,26 +57,19 @@ const SymptomsContainer = () => {
             <div className="blood-pressure-input">
                 <div className="blood-pressure-values">
                     <input
-                        placeholder="Wert 1"
-                        value={intensity}
-                        onChange={(event) => {
-                            setSymptomIntensity(event.target.value);
-                        }}
-                    />
-                    {/* <input
-                        placeholder="Wert 2"
-                        value={value2}
-                        onChange={(event) => {
-                            setBloodPressureValue2(event.target.value);
-                        }}
-                    /> */}
-                </div>
-                <div className="blood-pressure-comment">
-                    <input
-                        placeholder="Kommentar"
+                        placeholder="description"
                         value={description}
                         onChange={(event) => {
                             setSymptomDescription(event.target.value);
+                        }}
+                    />
+                </div>
+                <div className="blood-pressure-comment">
+                    <input
+                        placeholder="intensity"
+                        value={intensity}
+                        onChange={(event) => {
+                            setSymptomIntensity(event.target.value);
                         }}
                     />
                     <div className="btn-bp">
@@ -89,7 +80,7 @@ const SymptomsContainer = () => {
 
 
             <div className="blood-pressure-list">
-                <h2>Aufzeichnung</h2>
+                <h2>Aufzeichnung Symptome</h2>
                 {symptoms
                     .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
                     .map((symptoms) => {
