@@ -17,9 +17,9 @@ function Navigation() {
 
             <div className="nav-container">
 
-                <div>
+                {/* <div>
                     <button className="btn-logout" onClick={logout}>Logout</button>
-                </div>
+                </div> */}
 
                 <ul>
                     <Link to="/blood-pressure">
