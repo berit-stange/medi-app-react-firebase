@@ -47,7 +47,7 @@ const SymptomsElement = ({ symptoms }) => {
             <div>
                 <p>{symptoms.time.toString()}</p>
                 <p>{symptoms.description}</p>
-                <p>{symptoms.intensity} / 10</p>
+                <p>Intensität: {symptoms.intensity} / 10</p>
             </div>
 
             <div className="list-element-btn-box">
