@@ -14,6 +14,7 @@ import GoogleLogin from './GoogleLogin';
 
 // import { useState, useEffect } from "react";
 import "./App.css";
+import { SymptomsContainer } from './SymptomsContainer';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Route exact path="/medication" element={<MedicationList />} />
           <Route exact path="/blood-pressure" element={<BloodPressureContainer />} />
           <Route exact path="/settings" element={<UserSettings />} />
+          <Route exact path="/symptoms" element={<SymptomsContainer />} />
         </Routes>
       </BrowserRouter>
 
