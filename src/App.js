@@ -34,8 +34,6 @@ function App() {
       <BrowserRouter >
         <div className="welcome">
           Hallo {auth.currentUser.email}!
-          {/* </div>
-        <div> */}
           <button className="btn-logout" onClick={logout}>Logout</button>
         </div>
         <Navigation />
