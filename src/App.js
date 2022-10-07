@@ -6,6 +6,7 @@ import Navigation from './Navigation';
 import MedicationList from './MedicationList';
 import BloodPressureContainer from './BloodPressureContainer';
 import UserSettings from './UserSettings';
+import SymptomsContainer from './SymptomsContainer';
 
 import { auth } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -14,7 +15,7 @@ import GoogleLogin from './GoogleLogin';
 
 // import { useState, useEffect } from "react";
 import "./App.css";
-import { SymptomsContainer } from './SymptomsContainer';
+
 
 function App() {
 
