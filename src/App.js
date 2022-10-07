@@ -22,6 +22,11 @@ function App() {
   // Google Login
   const [user] = useAuthState(auth);
 
+  // Signout function
+  const logout = () => {
+    auth.signOut();
+  }
+
   return (
 
     user ?
@@ -29,6 +34,9 @@ function App() {
       <BrowserRouter >
         <div className="welcome">
           Hallo {auth.currentUser.email}!
+          {/* </div>
+        <div> */}
+          <button className="btn-logout" onClick={logout}>Logout</button>
         </div>
         <Navigation />
         <Routes >
