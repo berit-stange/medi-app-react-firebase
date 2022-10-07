@@ -6,7 +6,7 @@ import {
     deleteDoc,
     updateDoc
 } from 'firebase/firestore';
-import BloodPressureModal from './BloodPressureModal';
+import SymptomsModal from './SymptomsModal';
 
 
 const SymptomsElement = ({ symptoms }) => {
@@ -15,7 +15,7 @@ const SymptomsElement = ({ symptoms }) => {
     const [intensity, setSymptomIntensity] = useState("");
     const [description, setSymptomDescription] = useState("");
     const [symptom, setSymptom] = useState([]);
-    const [time, setBloodPressureTime] = useState("");
+    const [time, setSymptomTime] = useState("");
 
     const deleteSymptom = async (id) => {
         const symptomsDoc = doc(db, "symptoms", id);
@@ -26,7 +26,7 @@ const SymptomsElement = ({ symptoms }) => {
         setEditActive(true);
         setSymptomIntensity(symptoms.intensity);
         setSymptomDescription(symptoms.description);
-        setBloodPressureTime(symptoms.time);
+        setSymptomTime(symptoms.time);
         console.log("selectSymptom: " + symptoms.description);
     }
 
@@ -51,21 +51,21 @@ const SymptomsElement = ({ symptoms }) => {
             </div>
 
             <div className="list-element-btn-box">
-                <button onClick={() => setSymptom()} >
+                <button onClick={() => selectSymptom()} >
                     <span className="material-icons-round">settings</span>
                 </button>
             </div>
 
             {
                 editActive === true &&
-                <BloodPressureModal
+                <SymptomsModal
                     symptom={symptom}
                     setEditActive={setEditActive}
                     setSymptomIntensity={setSymptomIntensity}
                     intensity={intensity}
                     setSymptomDescription={setSymptomDescription}
                     description={description}
-                    setBloodPressureTime={setBloodPressureTime}
+                    setSymptomTime={setSymptomTime}
                     time={time}
                     updateSymptom={updateSymptom}
                     deleteSymptom={deleteSymptom}
