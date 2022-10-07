@@ -27,9 +27,9 @@ export class SymptomsContainer extends React.Component {
         this.state = {
             symptoms: [],
             id: "",
-            value1: "",
-            value2: "",
-            comment: "",
+            intensity: "",
+            // value2: "",
+            description: "",
             time: "",
             timestamp: null,
             uid: 0
@@ -40,11 +40,11 @@ export class SymptomsContainer extends React.Component {
     addSymptom = async () => {
         const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
-        const { value1, value2, comment } = this.state;
+        const { intensity, /* value2, */ description } = this.state;
         await addDoc(symptomsCollectionRef, {
-            value1: value1,
-            value2: value2,
-            comment: comment,
+            intensity: intensity,
+            // value2: value2,
+            description: description,
             time: dateDisplay,
             // timestamp: serverTimestamp(),
             timestamp: dateSorting,
@@ -80,7 +80,7 @@ export class SymptomsContainer extends React.Component {
         this.setState({
             symptoms: [],
             id: "",
-            value1: "",
+            intensity: "",
             uid: localStorage.getItem("uid")
         });
         this.getSymptoms();
@@ -97,25 +97,24 @@ export class SymptomsContainer extends React.Component {
                     <h2>Symptom hinzufügen</h2>
                     <div className="blood-pressure-input-box">
                         <div className="blood-pressure-input">
-                            <div className="blood-pressure-values">
-                                <input
-                                    placeholder="value 1"
-                                    onChange={event => this.setState({ value1: event.target.value })}
-                                />
-                                <input
-                                    placeholder="value 2"
-                                    onChange={event => this.setState({ value2: event.target.value })}
-                                />
-                            </div>
+
                             <div className="blood-pressure-comment">
                                 <input
-                                    placeholder="comment"
-                                    onChange={event => this.setState({ comment: event.target.value })}
+                                    placeholder="description"
+                                    onChange={event => this.setState({ description: event.target.value })}
                                 />
                                 <div className="btn-bp">
-                                    <button className="btn-add-bp" onClick={event => this.addSymptoms(event)} >+</button>
+                                    <button className="btn-add-bp" onClick={event => this.addSymptom(event)} >+</button>
                                 </div>
                             </div>
+
+                            <div className="blood-pressure-values">
+                                <input
+                                    placeholder="intensity"
+                                    onChange={event => this.setState({ intensity: event.target.value })}
+                                />
+                            </div>
+
                         </div>
                     </div>
 
@@ -129,8 +128,8 @@ export class SymptomsContainer extends React.Component {
                                         <div>
                                             <p>{s.time.toString()}</p>
                                             {/* <p>{bp.timestamp}</p> */}
-                                            <p>{s.value1} /{s.value2}</p>
-                                            <p>{s.comment}</p>
+                                            <p>{s.intensity} / 10</p>
+                                            <p>{s.description}</p>
                                             {/* <p>uid: {bp.uid}</p> */}
                                         </div>
                                         <div className="btn-box">
