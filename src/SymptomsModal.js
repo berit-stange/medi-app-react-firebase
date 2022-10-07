@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SymptomsModal = ({
-    symptom,
+    symptoms,
     setEditActive,
     setSymptomIntensity,
     intensity,
@@ -28,13 +28,13 @@ const SymptomsModal = ({
 
             <input
                 type="text"
-                intensity={intensity}
-                onChange={(event) => { setSymptomIntensity(event.target.value) }}
+                value={description}
+                onChange={(event) => { setSymptomDescription(event.target.value) }}
             />
             <input
                 type="text"
-                value={description}
-                onChange={(event) => { setSymptomDescription(event.target.value) }}
+                intensity={intensity}
+                onChange={(event) => { setSymptomIntensity(event.target.value) }}
             />
             <input
                 type="text"
@@ -44,14 +44,14 @@ const SymptomsModal = ({
 
             <div className="modal-btn-box">
                 <div>
-                    <button onClick={() => { deleteSymptom(symptom.id); }} >
+                    <button onClick={() => { deleteSymptom(symptoms.id); }} >
                         <span className="material-icons-round">
                             delete
                         </span>
                     </button>
                 </div>
                 <div>
-                    <button onClick={(click) => { updateSymptom(click, symptom.id); }}>
+                    <button onClick={(click) => { updateSymptom(click, symptoms.id); }}>
                         <span className="material-icons-round">
                             update
                         </span>
