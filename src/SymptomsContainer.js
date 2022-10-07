@@ -50,7 +50,7 @@ export class SymptomsContainer extends React.Component {
             timestamp: dateSorting,
             uid: this.state.uid
         });
-        window.open('/blood-pressure', '_self');
+        window.open('/symptoms', '_self');
     }
 
     deleteSymptom = async (id) => {
