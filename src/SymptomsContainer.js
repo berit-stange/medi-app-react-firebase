@@ -94,7 +94,7 @@ export class SymptomsContainer extends React.Component {
             <div>
 
                 <div>
-                    <h2>Add Symptoms</h2>
+                    <h2>Symptom hinzufügen</h2>
                     <div className="blood-pressure-input-box">
                         <div className="blood-pressure-input">
                             <div className="blood-pressure-values">
@@ -120,7 +120,7 @@ export class SymptomsContainer extends React.Component {
                     </div>
 
                     <div>
-                        <h2>Blutdruck Aufzeichnung</h2>
+                        <h2>Symptome Aufzeichnung</h2>
                         {symptoms
                             .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
                             .map((s) => {
