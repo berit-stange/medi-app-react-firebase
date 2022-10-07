@@ -28,6 +28,9 @@ function Navigation() {
                     <Link to="/medication">
                         <li>Medikamente</li>
                     </Link>
+                    <Link to="/symptoms">
+                        <li>Symptome</li>
+                    </Link>
                     <Link to="/settings">
                         <span className="material-icons-round">settings</span>
                     </Link>
