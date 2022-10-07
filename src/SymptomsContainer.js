@@ -1,160 +1,112 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-// import { auth } from './firebase';
+import { auth } from './firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useState, useEffect, useRef } from "react";
 import { db } from "./firebase-config";
+import SymptomsElement from './SymptomsElement';
 
 import {
     collection,
-    getDocs, //stattdessen query
+    getDocs,
     addDoc,
-    // updateDoc,
-    deleteDoc,
-    doc,
-    // onSnapshot,
-    // orderBy,
-    // serverTimestamp,
+    onSnapshot,
     query,
     where
 } from "firebase/firestore";
 
 
-const symptomsCollectionRef = collection(db, "symptoms");
+const SymptomsContainer = () => {
 
-export class SymptomsContainer extends React.Component {
+    const [user] = useAuthState(auth);
+    const [intensity, setSymptomIntensity] = useState("");
+    const [description, setSymptomDescription] = useState("");
+    const [symptoms, setSymptoms] = useState([]);
+    const symptomsCollectionRef = useRef(collection(db, "symptoms"));
 
-    constructor() {
-        super();
-        this.state = {
-            symptoms: [],
-            id: "",
-            intensity: "",
-            // value2: "",
-            description: "",
-            time: "",
-            timestamp: null,
-            uid: 0
-        };
-        // this.bloodPressureCollectionRef = collection(db, "bloodPressure");
-    }
 
-    addSymptom = async () => {
-        const dateDisplay = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+    const addSymptom = async (e) => {
+        e.preventDefault();
+        const date = new Date().toLocaleDateString('de-DE', { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
         const dateSorting = new Date().toISOString();
-        const { intensity, /* value2, */ description } = this.state;
-        await addDoc(symptomsCollectionRef, {
+        await addDoc(symptomsCollectionRef.current, {
             intensity: intensity,
             // value2: value2,
             description: description,
-            time: dateDisplay,
-            // timestamp: serverTimestamp(),
+            time: date,
             timestamp: dateSorting,
-            uid: this.state.uid
+            uid: user.uid
         });
-        window.open('/symptoms', '_self');
-    }
-
-    deleteSymptom = async (id) => {
-        const symptomsCollectionRef = doc(db, "symptoms", id);
-        await deleteDoc(symptomsCollectionRef);
-        window.open('/blood-pressure', '_self');
+        setSymptomIntensity("");
+        // setBloodPressureValue2("");
+        setSymptomDescription("");
     };
 
-    async getSymptoms() {
-        try {
-            const uid = localStorage.getItem("uid"); //warum funktioniert es nicht mit this.state.uid? 
-            const q = query(symptomsCollectionRef, where("uid", "==", uid));
-            const symptoms = await getDocs(q);
-            const setSymptoms = () => (symptoms.docs
-                .map((doc) => ({ ...doc.data(), id: doc.id }))
-            );
-            this.setState({
-                symptoms: JSON.parse(JSON.stringify(setSymptoms()))
-            });
-        } catch (error) {
-            console.log(error);
-        }
-        console.log(this.state.symptoms);
-    }
 
-    componentDidMount() {
-        this.setState({
-            symptoms: [],
-            id: "",
-            intensity: "",
-            uid: localStorage.getItem("uid")
-        });
-        this.getSymptoms();
-    };
+    useEffect(() => {
+        const q = query(symptomsCollectionRef.current, where("uid", "==", user.uid));
+        const handleSnapshot = (snapshot) => {
+            setSymptoms(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+        };
+        getDocs(q).then(handleSnapshot);
+        return onSnapshot(q, symptomsCollectionRef.current, handleSnapshot)
+    }, [user.uid, symptomsCollectionRef]);
 
-    render() {
-        const { symptoms } = this.state;
 
-        return (
 
-            <div>
-
-                <div>
-                    <h2>Symptom hinzufügen</h2>
-                    <div className="blood-pressure-input-box">
-                        <div className="blood-pressure-input">
-
-                            <div className="blood-pressure-comment">
-                                <input
-                                    placeholder="description"
-                                    onChange={event => this.setState({ description: event.target.value })}
-                                />
-                                <div className="btn-bp">
-                                    <button className="btn-add-bp" onClick={event => this.addSymptom(event)} >+</button>
-                                </div>
-                            </div>
-
-                            <div className="blood-pressure-values">
-                                <input
-                                    placeholder="intensity"
-                                    onChange={event => this.setState({ intensity: event.target.value })}
-                                />
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div>
-                        <h2>Symptome Aufzeichnung</h2>
-                        {symptoms
-                            .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
-                            .map((s) => {
-                                return (
-                                    <div className="blood-pressure-list-item" key={s.id}>
-                                        <div>
-                                            <p>{s.time.toString()}</p>
-                                            <p>{s.description}</p>
-                                            <p>{s.intensity} / 10</p>
-                                        </div>
-                                        <div className="btn-box">
-                                            <button className=""
-                                                onClick={() => { this.deleteSymptom(s.id); }}
-                                            >
-                                                <span className="material-icons-round">
-                                                    delete
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                );
-                            })}
+    return (
+        <div className="blood-pressure-input-box">
+            <h2>Symptom hinzufügen</h2>
+            <div className="blood-pressure-input">
+                <div className="blood-pressure-values">
+                    <input
+                        placeholder="Wert 1"
+                        value={intensity}
+                        onChange={(event) => {
+                            setSymptomIntensity(event.target.value);
+                        }}
+                    />
+                    {/* <input
+                        placeholder="Wert 2"
+                        value={value2}
+                        onChange={(event) => {
+                            setBloodPressureValue2(event.target.value);
+                        }}
+                    /> */}
+                </div>
+                <div className="blood-pressure-comment">
+                    <input
+                        placeholder="Kommentar"
+                        value={description}
+                        onChange={(event) => {
+                            setSymptomDescription(event.target.value);
+                        }}
+                    />
+                    <div className="btn-bp">
+                        <button className="btn-add-bp" onClick={addSymptom} >+</button>
                     </div>
                 </div>
+            </div>
 
-            </div >
 
-        );
-    }
+            <div className="blood-pressure-list">
+                <h2>Aufzeichnung</h2>
+                {symptoms
+                    .sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
+                    .map((symptoms) => {
+                        return (
+
+                            <div key={symptoms.id}  >
+                                <SymptomsElement
+                                    symptoms={symptoms}
+                                />
+                            </div>
+                        );
+                    })
+                }
+            </div>
+
+        </div>
+    );
 }
 
-// xxxx.propTypes = {
-//     directorData: PropTypes.shape({
-//        xxx: PropTypes.string.isRequired,
-//         xxx: PropTypes.string.isRequired
-//     }).isRequired,
-//     onBackClick: PropTypes.func.isRequired
-// };
+export default SymptomsContainer;
