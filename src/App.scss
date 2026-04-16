@@ -1,0 +1,374 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400;600;700&display=swap");
+
+
+$base-color: #F4F3F1;
+$dark-color: #27336b;
+$accent-color: #80ecda;
+$accent-color-op: #80ecda86;
+$font-sans: 'Montserrat',
+sans-serif;
+$font-serif: 'Roboto Slab',
+serif;
+$font-big: 3rem;
+$font-medium: 1.3rem;
+$font-small: 0.85rem;
+$font-tiny: 0.7rem;
+$font-heavy: 600;
+$font-regular: 400;
+$font-light: 300;
+$number-medium: 1rem;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-serif;
+    font-size: $font-small;
+    font-weight: $font-light;
+    background-color: $base-color;
+    color: $dark-color;
+    margin: 0 auto;
+    max-width: 720px;
+}
+
+h1 {
+    font-size: $font-medium;
+    margin: 0.3em;
+    text-align: center;
+}
+
+h2 {
+    font-size: $font-medium;
+    font-weight: $font-regular;
+    margin: 1.5em 0 0.5em 0;
+    text-align: center;
+}
+
+// p {
+//     text-align: center;
+// }
+
+.nav-container {
+    display: flex;
+    justify-content: center;
+    width: 99%;
+    border-bottom: 1px solid $dark-color;
+
+    ul {
+        display: flex;
+
+        a {
+            color: $dark-color;
+            text-decoration: none;
+
+            &:visited {
+                color: $dark-color;
+            }
+        }
+
+        li {
+            background-color: $accent-color;
+            border-radius: 0.5em 0.5em;
+            list-style: none;
+            font-weight: $font-regular;
+            font-size: $font-tiny;
+            height: 3em;
+            margin: 0 0.5em;
+            padding: 0.8em 0.7em 0 0.7em;
+        }
+
+    }
+}
+
+.btn-logout {
+    background-color: $accent-color-op;
+    border-radius: 0.5em 0.5em;
+    font-weight: $font-regular;
+    font-size: $font-tiny;
+    height: 3.2em;
+    margin: 1em;
+    padding: 0 10px 2px 10px;
+}
+
+.welcome {
+    font-size: $font-tiny;
+    padding: 5px;
+    text-align: center;
+}
+
+.day-container {
+    background-color: $dark-color;
+    border-radius: 0.5em;
+    color: $accent-color;
+    margin: 0 auto;
+    padding: 10px;
+    height: 88vh;
+    width: 95%;
+}
+
+.container {
+    background-color: $dark-color;
+    border-radius: 0.5em;
+    color: $accent-color;
+    display: grid;
+    padding: 1em;
+    margin: 0.5em;
+    justify-items: center;
+}
+
+.date-container {
+    color: $accent-color;
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    background-color: $accent-color;
+    border: none;
+    border-radius: 0.5em;
+    color: $dark-color;
+    font-family: $font-serif;
+    // height: 3em;
+    margin: 0.5rem;
+    padding: 0.4rem;
+    flex-grow: 1;
+
+    &:focus-visible {
+        outline: none;
+    }
+}
+
+.blood-pressure-title {
+    margin: 0.8em 0 0 0;
+}
+
+.blood-pressure-input-box {
+    // background-color: $dark-color;
+    border-radius: 0.5em;
+    // color: $accent-color;
+    padding: 0.5em 1em 1em 0.5em;
+    margin: 0;
+    display: flex;
+    // flex-wrap: wrap;
+    flex-direction: column;
+    // justify-content: space-between;
+}
+
+.blood-pressure-input {
+    display: flex;
+    // flex-wrap: wrap;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.5em 0 1em 0;
+}
+
+.blood-pressure-values {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.blood-pressure-comment {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+}
+
+.blood-pressure-list {
+    padding: 1em 0 1em 0;
+}
+
+.blood-pressure-list-item {
+    // background-color: $dark-color;
+    border-bottom: 2px dotted;
+    // border-radius: 0.5em;
+    color: $dark-color;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    font-weight: $font-regular;
+    justify-content: space-between;
+    padding: 1em;
+    margin: 0.5em;
+    text-align: left;
+}
+
+button {
+    background-color: $base-color;
+    border: 0;
+    border-radius: 50% 50%;
+    color: $dark-color;
+    cursor: pointer;
+    font-family: "Roboto Slab", serif;
+    font-size: $font-small;
+    // margin: 1em;
+}
+
+.btn-add {
+    background-color: $accent-color;
+    font-size: $font-small;
+    font-weight: $font-heavy;
+    margin: 0 0 0 1rem;
+}
+
+.btn-add-bp {
+    background-color: $dark-color;
+    color: $accent-color;
+    font-weight: $font-heavy;
+    font-size: $font-medium;
+    height: 2.5em;
+    width: 2.5em;
+    margin: 0 0 0 1rem;
+}
+
+.btn-add-med {
+    background-color: $dark-color;
+    color: $accent-color;
+    font-size: $font-small;
+    font-weight: $font-heavy;
+    height: 3.5em;
+    width: 3.5em;
+    // margin: 0.2rem 0 0rem 0.2rem;
+    // flex-grow: 1;
+}
+
+.btn-add-dose {
+    background-color: $dark-color;
+    color: $accent-color;
+    font-size: $number-medium;
+    font-weight: $font-heavy;
+    height: 3em;
+    width: 3em;
+    margin: 0 0 0 0.5em;
+    flex-grow: 1;
+}
+
+.btn-med-box {
+    align-self: center;
+    // flex-grow: 1;
+}
+
+.btn-box {
+    // align-self: flex-end;
+    align-self: baseline;
+}
+
+.medi-list {
+    padding: 2em 0 1em 0;
+}
+
+.medi-list-item {
+    border-bottom: 2px dotted;
+    color: $dark-color;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: $font-regular;
+    padding: 1em;
+    margin: 0.5em;
+    text-align: left;
+}
+
+.medi-title {
+    background-color: $dark-color;
+    border: none;
+    border-radius: 0.5em;
+    color: $accent-color;
+    font-weight: $font-regular;
+    height: 2.5em;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    min-width: 33%;
+    flex-grow: 1;
+}
+
+.btn-med-delete {
+    align-self: center;
+}
+
+.medi-values {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+}
+
+.medi-input {
+    height: 2.8em;
+    max-width: 120px;
+    // min-width: 33%;
+    flex-grow: 1;
+}
+
+.login-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    h1 {
+        font-size: 2em;
+    }
+}
+
+.btn-login {
+    height: 50vw;
+    width: 50vw;
+    max-height: 400px;
+    max-width: 400px;
+    margin: 1em;
+    font-weight: 600;
+    background-color: $accent-color;
+    font-size: 1.5em;
+}
+
+.search-box {
+    display: flex;
+}
+
+.modal {
+    background-color: $dark-color;
+    border-radius: 1em;
+    padding: 2em;
+    width: 90vw;
+    min-height: 300px;
+    height: 55vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; //vertikal - bzw. in der flex-direction
+    position: fixed;
+    top: 15vh;
+    left: 3vw;
+
+    input {
+        height: 20px;
+    }
+
+    button {
+        width: 3em;
+        height: 3em;
+        background-color: $dark-color;
+        float: right;
+        // display: block;
+    }
+
+    .modal-btn-box {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: space-between;
+    }
+
+    .material-icons-round {
+        font-size: 3em;
+        color: $base-color;
+    }
+}
