@@ -1,3 +1,12 @@
+# Medi App
+„Medi App“ ist eine Web-App zur Nachverfolgung von Medikamenten.
+
+Nutzer können sich mit ihrem Google-Konto anmelden, Medikamente hinzufügen, deren Einnahme mit einem Klick protokollieren und ihren Blutdruck erfassen.
+
+![medi-app-react-firebase](./images/medi-app-add-medication-4.jpg)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
